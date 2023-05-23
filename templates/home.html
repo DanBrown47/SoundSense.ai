@@ -1,0 +1,669 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<section id="banner-one">
+    <div class="swiper-container banner-slider-two" data-swiper-config='{"loop": true, "effect": "slide", "prevButton":"#banner-nav-prev", "nextButton": "#banner-nav-next", "speed": 700, "autoplay": 500000, "paginationClickable": true}'>
+
+        <div class="swiper-wrapper">
+            <div class="swiper-slide" data-bg-image="media/banner/5.jpg" data-parallax="image">
+
+                <div class="slider-content-two content-three" data-animate="fadeIn">
+                    <img src="media/banner/1.png" alt="Music">
+                    <div class="content text-center">
+                        <h3 data-animate="fadeInUp">Artist Feel You</h3>
+                        <h2 data-animate="fadeInUp" data-delay="0.5s">
+                            Happy Rythem of Life
+                        </h2>
+
+
+                        <p data-animate="fadeInUp" data-delay="0.9s">
+                            There are many variations of passages of Lorem Ipsum available but<br> the majority have to an suffered alteration.
+                        </p>
+                        <a href="#" class="store-btn" data-animate="fadeInLeft" data-delay="0.9s">
+                <i class="tim-playstore"></i>
+                Google Play
+            </a>
+
+                        <a href="#" class="store-btn ml__15" data-animate="fadeInRight" data-delay="0.9s">
+                <i class="tim-apple-logo"></i>
+                Apple Store
+            </a>
+                    </div>
+
+                </div>
+                <!-- /.slider-content -->
+
+            </div>
+
+            <div class="swiper-slide" data-bg-image="media/banner/6.jpg" data-parallax="image">
+
+                <div class="slider-content-two text-left" data-animate="fadeIn">
+                    <img src="media/banner/2.png" alt="Music">
+                    <h3 data-animate="fadeInUp">Artist Feel You</h3>
+                    <h2 data-animate="fadeInUp" data-delay="0.5s">
+                        Happy Rythem of Life
+                    </h2>
+
+
+                    <p data-animate="fadeInUp" data-delay="0.9s">
+                        There are many variations of passages of Lorem Ipsum available but<br> the majority have to an suffered alteration.
+                    </p>
+                    <a href="#" class="tim-btn" data-animate="fadeInLeft" data-delay="0.9s">
+            Explore More
+        </a>
+
+                    <a href="#" class="video-btn-two" data-animate="fadeInRight" data-delay="0.9s">
+            <i class="fa fa-play"></i>
+            Watch video
+        </a>
+
+                </div>
+                <!-- /.slider-content -->
+            </div>
+        </div>
+
+
+        <div class="header_player">
+            <div class="tim-container ">
+                <!-- Audio Player -->
+                <div class="player-container">
+                    <div class="current-tracks">
+                        <div id="main_player" class="jp-jplayer">
+
+                        </div>
+                        <div id="nowPlaying">
+                            <h3 class="track-name"></h3>
+                            <span class="artist-name"></span>
+                        </div>
+                        <!-- #nowPlaying -->
+                    </div>
+                    <!-- /.current-tracks -->
+
+                    <div id="header_player" class="jp-audio" role="application" aria-label="media player">
+                        <div class="jp-type-playlist clearfix">
+                            <div class="jp-gui jp-interface">
+                                <div class="jp-controls">
+                                    <button class="jp-previous" tabindex="0"><i class="fa fa-backward"></i></button>
+                                    <button class="jp-play" tabindex="0"><i class="fa fa-play"></i></button>
+                                    <button class="jp-next" tabindex="0"><i class="fa fa-forward"></i></button>
+                                </div>
+                                <!-- Display the track inside player -->
+
+                                <div class="jp-progress">
+                                    <div class="jp-seek-bar">
+                                        <div class="jp-play-bar"></div>
+                                    </div>
+                                </div>
+
+                                <div class="jp-duration" role="timer" aria-label="duration"></div>
+
+                                <div class="vel-wrap">
+                                    <button class="jp-mute" tabindex="0"><i class="fa fa-volume-up"></i></button>
+
+                                    <div class="jp-volume-bar">
+                                        <div class="jp-volume-bar-value"></div>
+                                    </div>
+
+                                </div>
+                                <!-- /.vel-wrap -->
+
+                                <button id="playlist-toggle" class=""><i class="fa fa-list"></i></button>
+
+                                <!-- Playlist -->
+                                <div class="jp-playlist">
+                                    <ul>
+                                        <li></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.header_player -->
+    </div>
+</section>
+
+<!--===========================-->
+<!--=        	About         =-->
+<!--===========================-->
+
+<section id="about" class="section-padding">
+    <div class="tim-container">
+        <div class="row">
+            <div class="col-xl-6 col-lg-12">
+                <div class="about-details">
+                    <img src="media/about/1.jpg" alt="About">
+
+                    <h3>James Robinson</h3>
+                    <h4><span>Genre :</span> Guitarist/Singer</h4>
+
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolo magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut the aliquip exmmodo consequat. Duis aute irure dolor in
+                        reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.Excepteur sint occa it amet, consectetur adipiscing elit, sed do eiusmecat.
+                    </p>
+
+                    <div class="artist-music-inner clearfix">
+                        <div class="aritist-music">
+                            <div class="icon">
+                                <i class="tim-music-album"></i>
+                            </div>
+
+                            <div class="content">
+                                <p>13</p>
+                                <span>Album</span>
+                            </div>
+                        </div>
+
+                        <div class="aritist-music clearfix">
+                            <div class="icon">
+                                <i class="tim-music-album-1"></i>
+                            </div>
+
+                            <div class="content">
+                                <p>24</p>
+                                <span>Single</span>
+                            </div>
+                        </div>
+
+                        <div class="aritist-music clearfix">
+                            <div class="icon">
+                                <i class="tim-sound-frecuency"></i>
+                            </div>
+
+                            <div class="content">
+                                <p>17</p>
+                                <span>Concerts</span>
+                            </div>
+                        </div>
+
+                        <div class="aritist-music clearfix">
+                            <div class="icon">
+                                <i class="tim-headphones"></i>
+                            </div>
+
+                            <div class="content">
+                                <p>16</p>
+                                <span>Tracks</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.artist-music-inner -->
+                </div>
+                <!-- /.about-details -->
+            </div>
+            <!-- /.col-md-6 -->
+
+            <div class="col-xl-6 col-lg-12">
+                <div class="music-playlist">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <div class="album-cover-img">
+                                <img src="media/about/2.jpg" alt="thumb">
+                                <a href="https://www.youtube.com/watch?v=0I8GmbDU7c4" class="popup-video-btn"><i class="fa fa-play"></i></a>
+                            </div>
+                        </div>
+                        <!-- /.col-md-6 -->
+
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <div class="album-cover-img">
+                                <img src="media/about/3.jpg" alt="Thumb">
+                                <a href="https://www.youtube.com/watch?v=0I8GmbDU7c4" class="popup-video-btn"><i class="fa fa-play"></i></a>
+                            </div>
+                        </div>
+                        <!-- /.col-md-6 -->
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <div class="about-details mt__30">
+                    <h3>Hit Songs List 2018</h3>
+                </div>
+
+                <!-- START Audio Player -->
+                <div class="music-playlist-one">
+                    <ul class="hit-plalist">
+                        <li>
+                            <a href="media/audio/01.mp3" class="sm2_button"><i></i></a>
+                            <span class="song-name">Song Name 1</span>
+                            <span class="dur">04.12</span>
+                            <a href="#" class="video-song"><i class="fa fa-video-camera"></i></a>
+                            <a href="#" class="song-download"><i class="fa fa-download"></i></a>
+                        </li>
+
+                        <li>
+                            <a href="media/audio/02.mp3" class="sm2_button"><i></i></a>
+                            <span class="song-name">Song Name 2</span>
+                            <span class="dur">04.12</span>
+                            <a href="#" class="video-song"><i class="fa fa-video-camera"></i></a>
+                            <a href="#" class="song-download"><i class="fa fa-download"></i></a>
+                        </li>
+
+                        <li>
+                            <a href="media/audio/03.mp3" class="sm2_button"><i></i></a>
+                            <span class="song-name">Song Name 3</span>
+                            <span class="dur">04.12</span>
+                            <a href="#" class="video-song"><i class="fa fa-video-camera"></i></a>
+                            <a href="#" class="song-download"><i class="fa fa-download"></i></a>
+                        </li>
+
+                        <li>
+                            <a href="media/audio/04.mp3" class="sm2_button"><i></i></a>
+                            <span class="song-name">Song Name 4</span>
+                            <span class="dur">04.12</span>
+                            <a href="#" class="video-song"><i class="fa fa-video-camera"></i></a>
+                            <a href="#" class="song-download"><i class="fa fa-download"></i></a>
+                        </li>
+
+                        <li>
+                            <a href="media/audio/05.mp3" class="sm2_button"><i></i></a>
+                            <span class="song-name">Song Name 5</span>
+                            <span class="dur">04.12</span>
+                            <a href="#" class="video-song"><i class="fa fa-video-camera"></i></a>
+                            <a href="#" class="song-download"><i class="fa fa-download"></i></a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.music-playlist-one -->
+                <!-- END Audio Player -->
+            </div>
+            <!-- /.col-md-6 -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.tim-container -->
+</section>
+<!-- /#about -->
+
+<!--==================================-->
+<!--=        	Sale Album         	 =-->
+<!--==================================-->
+
+<section id="sale-album" class="section-padding">
+    <div class="container">
+        <div class="section-title text-center">
+            <h2>Bast Sale <span>Albums</span></h2>
+            <p>
+                There are many variations of passages of Lorem Ipsum available but the majority have suffered<br> alteration in some injected humour.
+            </p>
+        </div>
+
+        <div class="tabnav-wrap">
+            <ul class="nav sale-tabs" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">16 April 2018</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">18 April 2018</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">19 May 2018</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="contact-tab-two" data-toggle="tab" href="#contact-two" role="tab" aria-controls="contact-two" aria-selected="false">21 May 2018</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /.tabnav-wrap -->
+
+        <div class="tab-content">
+            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="slider-content">
+                            <h3>About the Album</h3>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisc ing elsUeiusmod tempor incididunt ut labore et dolore to the magna aliqeniminim veniam, quis nostrud exer invr idea citation.
+                            </p>
+
+                            <ul class="song-details">
+                                <li>Music ipsum dolor sit amet, consectetur adipisc</li>
+                                <li>Music ipsum dolor sit amet, consectetur adipisc</li>
+                                <li>Music ipsum dolor sit amet, consectetur adipisc</li>
+                                <li>Music ipsum dolor sit amet, consectetur adipisc</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- /.col-lg-4 -->
+
+                    <div class="col-lg-8">
+                        <div class="best-sale-album">
+                            <div class="best-sale-album-cover">
+                                <img src="media/about/12.jpg" alt="Album Cover">
+                            </div>
+                            <!-- /.best-sale-album-cover -->
+
+                            <div class="music-playlist-two">
+                                <ul class="hit-plalist">
+                                    <li>
+                                        <a href="media/audio/adventures.mp3" class="sm2_button"><i></i></a>
+                                        <span class="song-name">Adventures</span>
+                                        <span class="dur">04.12</span>
+                                        <a href="#" class="video-song"><i class="fa fa-video-camera"></i></a>
+                                        <a href="#" class="song-download"><i class="fa fa-download"></i></a>
+                                    </li>
+
+                                    <li>
+                                        <a href="media/audio/high_release.mp3" class="sm2_button"><i></i></a>
+                                        <span class="song-name">High NCS Release </span>
+                                        <span class="dur">04.12</span>
+                                        <a href="#" class="video-song"><i class="fa fa-video-camera"></i></a>
+                                        <a href="#" class="song-download"><i class="fa fa-download"></i></a>
+                                    </li>
+
+                                    <li>
+                                        <a href="media/audio/motivational_back_round.mp3" class="sm2_button"><i></i></a>
+                                        <span class="song-name">Motivational Background Music</span>
+                                        <span class="dur">04.12</span>
+                                        <a href="#" class="video-song"><i class="fa fa-video-camera"></i></a>
+                                        <a href="#" class="song-download"><i class="fa fa-download"></i></a>
+                                    </li>
+
+                                    <li>
+                                        <a href="media/audio/nicolai_heidlas.mp3" class="sm2_button"><i></i></a>
+                                        <span class="song-name">Nicolai Heidlas</span>
+                                        <span class="dur">04.12</span>
+                                        <a href="#" class="video-song"><i class="fa fa-video-camera"></i></a>
+                                        <a href="#" class="song-download"><i class="fa fa-download"></i></a>
+                                    </li>
+
+                                    <li>
+                                        <a href="media/audio/sappheiros.mp3" class="sm2_button"><i></i></a>
+                                        <span class="song-name">Sappheiros</span>
+                                        <span class="dur">04.12</span>
+                                        <a href="#" class="video-song"><i class="fa fa-video-camera"></i></a>
+                                        <a href="#" class="song-download"><i class="fa fa-download"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- /.music-playlist-one -->
+                        </div>
+                        <!-- /.best-sale-album -->
+                    </div>
+                    <!-- /.col-lg-8 -->
+                </div>
+                <!-- /.row -->
+            </div>
+            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                <div class="row">
+
+                    <div class="col-lg-4">
+                        <div class="slider-content">
+                            <h3>About the Album</h3>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisc ing elsUeiusmod tempor incididunt ut labore et dolore to the magna aliqeniminim veniam, quis nostrud exer invr idea citation.
+                            </p>
+
+                            <ul class="song-details">
+                                <li>Music ipsum dolor sit amet, consectetur adipisc</li>
+                                <li>Music ipsum dolor sit amet, consectetur adipisc</li>
+                                <li>Music ipsum dolor sit amet, consectetur adipisc</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- /.col-lg-4 -->
+
+                    <div class="col-lg-8">
+                        <div class="best-sale-album">
+                            <div class="best-sale-album-cover">
+                                <img src="media/artist/3.jpg" alt="Album Cover">
+                            </div>
+                            <!-- /.best-sale-album-cover -->
+
+                            <div class="music-playlist-two">
+                                <ul class="hit-plalist">
+                                    <li>
+                                        <a href="media/audio/happy_life.mp3" class="sm2_button"><i></i></a>
+                                        <span class="song-name">Happy Life</span>
+                                        <span class="dur">04.12</span>
+                                        <a href="#" class="video-song"><i class="fa fa-video-camera"></i></a>
+                                        <a href="#" class="song-download"><i class="fa fa-download"></i></a>
+                                    </li>
+
+                                    <li>
+                                        <a href="media/audio/island.mp3" class="sm2_button"><i></i></a>
+                                        <span class="song-name">Island - MBB</span>
+                                        <span class="dur">04.12</span>
+                                        <a href="#" class="video-song"><i class="fa fa-video-camera"></i></a>
+                                        <a href="#" class="song-download"><i class="fa fa-download"></i></a>
+                                    </li>
+
+                                    <li>
+                                        <a href="media/audio/sthlm_sunset.mp3" class="sm2_button"><i></i></a>
+                                        <span class="song-name">Sthlm Sunset</span>
+                                        <span class="dur">04.12</span>
+                                        <a href="#" class="video-song"><i class="fa fa-video-camera"></i></a>
+                                        <a href="#" class="song-download"><i class="fa fa-download"></i></a>
+                                    </li>
+
+                                    <li>
+                                        <a href="media/audio/beach.mp3" class="sm2_button"><i></i></a>
+                                        <span class="song-name">Beach - MBB</span>
+                                        <span class="dur">04.12</span>
+                                        <a href="#" class="video-song"><i class="fa fa-video-camera"></i></a>
+                                        <a href="#" class="song-download"><i class="fa fa-download"></i></a>
+                                    </li>
+
+                                    <li>
+                                        <a href="media/audio/dance.mp3" class="sm2_button"><i></i></a>
+                                        <span class="song-name">Dance With Me </span>
+                                        <span class="dur">04.12</span>
+                                        <a href="#" class="video-song"><i class="fa fa-video-camera"></i></a>
+                                        <a href="#" class="song-download"><i class="fa fa-download"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- /.music-playlist-one -->
+                        </div>
+                        <!-- /.best-sale-album -->
+                    </div>
+                    <!-- /.col-lg-8 -->
+
+                </div>
+                <!-- /.row -->
+            </div>
+            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                <div class="row">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="slider-content">
+                                <h3>About the Album</h3>
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipisc ing elsUeiusmod tempor incididunt ut labore et dolore to the magna aliqeniminim veniam, quis nostrud exer invr idea citation.
+                                </p>
+
+                                <ul class="song-details">
+                                    <li>Music ipsum dolor sit amet, consectetur adipisc</li>
+                                    <li>Music ipsum dolor sit amet, consectetur adipisc</li>
+                                    <li>Music ipsum dolor sit amet, consectetur adipisc</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- /.col-lg-4 -->
+
+                        <div class="col-lg-8">
+                            <div class="best-sale-album">
+                                <div class="best-sale-album-cover">
+                                    <img src="media/artist/4.jpg" alt="Album Cover">
+                                </div>
+                                <!-- /.best-sale-album-cover -->
+
+                                <div class="music-playlist-two">
+                                    <ul class="hit-plalist">
+                                        <li>
+                                            <a href="media/audio/happy.mp3" class="sm2_button"><i></i></a>
+                                            <span class="song-name">Happy Dime</span>
+                                            <span class="dur">04.12</span>
+                                            <a href="#" class="video-song"><i class="fa fa-video-camera"></i></a>
+                                            <a href="#" class="song-download"><i class="fa fa-download"></i></a>
+                                        </li>
+
+                                        <li>
+                                            <a href="media/audio/paradise.mp3" class="sm2_button"><i></i></a>
+                                            <span class="song-name">Paradise</span>
+                                            <span class="dur">04.12</span>
+                                            <a href="#" class="video-song"><i class="fa fa-video-camera"></i></a>
+                                            <a href="#" class="song-download"><i class="fa fa-download"></i></a>
+                                        </li>
+
+                                        <li>
+                                            <a href="media/audio/this_is_me.mp3" class="sm2_button"><i></i></a>
+                                            <span class="song-name">This Is Me</span>
+                                            <span class="dur">04.12</span>
+                                            <a href="#" class="video-song"><i class="fa fa-video-camera"></i></a>
+                                            <a href="#" class="song-download"><i class="fa fa-download"></i></a>
+                                        </li>
+
+                                        <li>
+                                            <a href="media/audio/come_home.mp3" class="sm2_button"><i></i></a>
+                                            <span class="song-name">Come Home</span>
+                                            <span class="dur">04.12</span>
+                                            <a href="#" class="video-song"><i class="fa fa-video-camera"></i></a>
+                                            <a href="#" class="song-download"><i class="fa fa-download"></i></a>
+                                        </li>
+
+                                        <li>
+                                            <a href="media/audio/sunshines.mp3" class="sm2_button"><i></i></a>
+                                            <span class="song-name">Sunshine</span>
+                                            <span class="dur">04.12</span>
+                                            <a href="#" class="video-song"><i class="fa fa-video-camera"></i></a>
+                                            <a href="#" class="song-download"><i class="fa fa-download"></i></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!-- /.music-playlist-one -->
+                            </div>
+                            <!-- /.best-sale-album -->
+                        </div>
+                        <!-- /.col-lg-8 -->
+                    </div>
+                    <!-- /.row -->
+                </div>
+            </div>
+            <div class="tab-pane fade" id="contact-two" role="tabpanel" aria-labelledby="contact-tab-two">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="slider-content">
+                            <h3>About the Album</h3>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisc ing elsUeiusmod tempor incididunt ut labore et dolore to the magna aliqeniminim veniam, quis nostrud exer invr idea citation.
+                            </p>
+
+                            <ul class="song-details">
+                                <li>Music ipsum dolor sit amet, consectetur adipisc</li>
+                                <li>Music ipsum dolor sit amet, consectetur adipisc</li>
+                                <li>Music ipsum dolor sit amet, consectetur adipisc</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- /.col-lg-4 -->
+
+                    <div class="col-lg-8">
+                        <div class="best-sale-album">
+                            <div class="best-sale-album-cover">
+                                <img src="media/artist/5.jpg" alt="Album Cover">
+                            </div>
+                            <!-- /.best-sale-album-cover -->
+
+                            <div class="music-playlist-two">
+                                <ul class="hit-plalist">
+                                    <li>
+                                        <a href="media/audio/summer_spliffs.mp3" class="sm2_button"><i></i></a>
+                                        <span class="song-name">Summer Spliffs</span>
+                                        <span class="dur">04.12</span>
+                                        <a href="#" class="video-song"><i class="fa fa-video-camera"></i></a>
+                                        <a href="#" class="song-download"><i class="fa fa-download"></i></a>
+                                    </li>
+
+                                    <li>
+                                        <a href="media/audio/star_eyes.mp3" class="sm2_button"><i></i></a>
+                                        <span class="song-name">Star Eyes</span>
+                                        <span class="dur">04.12</span>
+                                        <a href="#" class="video-song"><i class="fa fa-video-camera"></i></a>
+                                        <a href="#" class="song-download"><i class="fa fa-download"></i></a>
+                                    </li>
+
+                                    <li>
+                                        <a href="media/audio/lotus_lane.mp3" class="sm2_button"><i></i></a>
+                                        <span class="song-name">Lotus Lane</span>
+                                        <span class="dur">04.12</span>
+                                        <a href="#" class="video-song"><i class="fa fa-video-camera"></i></a>
+                                        <a href="#" class="song-download"><i class="fa fa-download"></i></a>
+                                    </li>
+
+                                    <li>
+                                        <a href="media/audio/reloaded.mp3" class="sm2_button"><i></i></a>
+                                        <span class="song-name">Reloaded</span>
+                                        <span class="dur">04.12</span>
+                                        <a href="#" class="video-song"><i class="fa fa-video-camera"></i></a>
+                                        <a href="#" class="song-download"><i class="fa fa-download"></i></a>
+                                    </li>
+
+                                    <li>
+                                        <a href="media/audio/umbra_feat_sal_berkmin.mp3" class="sm2_button"><i></i></a>
+                                        <span class="song-name">Umbra Feat SalBerkmin</span>
+                                        <span class="dur">04.12</span>
+                                        <a href="#" class="video-song"><i class="fa fa-video-camera"></i></a>
+                                        <a href="#" class="song-download"><i class="fa fa-download"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- /.music-playlist-one -->
+                        </div>
+                        <!-- /.best-sale-album -->
+                    </div>
+                    <!-- /.col-lg-8 -->
+                </div>
+                <!-- /.row -->
+            </div>
+        </div>
+    </div>
+    <!-- /.tim-container -->
+</section>
+<!-- /#sale-album -->
+
+<!--================================-->
+<!--=        	Newsletter         =-->
+<!--================================-->
+
+<section id="newsletter">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7 col-md-6">
+                <div class="newsletter">
+                    <h2>Sign Up for Newsletter</h2>
+                    <h4>We’ll be with you on every walk of life on how to identify new opportunities.</h4>
+                </div>
+                <!-- /.newsletter -->
+            </div>
+            <!-- /.col-md-7 -->
+
+            <div class="col-lg-5 col-md-6">
+                <div class="newsletter-inner">
+                    <form action="https://themeim.com/demo/milando/php/subscribe.php" method="post" class="newsletter-form" data-deventform="newsletter-subscribe">
+                        <input type="email" name="email" class="form-control" id="newsletter-form-email" placeholder="Enter your E-mail" required>
+                        <button type="submit" name="submit" id="newsletter-submit" class="btn tim-btn">
+                    <span>Subscribe</span>
+                    <i class="fa fa-circle-o-notch fa-spin"></i>
+                </button>
+                        <div class="clearfix"></div>
+                        <div class="form-result alert">
+                            <div class="content"></div>
+                        </div>
+                        <!-- /.form-result-->
+                    </form>
+                    <!-- /.newsletter-form -->
+                </div>
+                <!-- /.newsletter-inner -->
+            </div>
+            <!-- /.col-md-5 -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container -->
+</section>
+<!-- /#newsletter -->
+
+{% endblock %}

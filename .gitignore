@@ -7,15 +7,15 @@ __pycache__/
 *.so
 
 # Distribution / packaging
-.Python
-build/
+#.Python
+#build/
 develop-eggs/
-dist/
+#dist/
 downloads/
 eggs/
 .eggs/
-lib/
-lib64/
+#lib/
+#lib64/
 parts/
 sdist/
 var/
@@ -58,7 +58,7 @@ cover/
 # Django stuff:
 *.log
 local_settings.py
-db.sqlite3
+#db.sqlite3
 db.sqlite3-journal
 
 # Flask stuff:
@@ -123,7 +123,7 @@ celerybeat.pid
 .env
 .venv
 env/
-venv/
+#venv/
 ENV/
 env.bak/
 venv.bak/
