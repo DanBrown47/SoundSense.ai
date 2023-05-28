@@ -1,0 +1,11 @@
+{
+      "Genre": "mtg_jamendo_genre-discogs-effnet-1",
+      "Engagement": "engagement_regression-discogs-effnet-1",
+      "Approachability": "approachability_regression-discogs-effnet-1",
+      "Theme": "mtg_jamendo_moodtheme-discogs-effnet-1",
+      "Instrument": "mtg_jamendo_instrument-discogs-effnet-1",
+      "Nsynth": "nsynth_acoustic_electronic-discogs-effnet-1",
+      "Nsynth_Instrument": "nsynth_instrument-discogs-effnet-1",
+      "Nsynth_Reverb": "nsynth_reverb-discogs-effnet-1",
+      "Tag": "mtg_jamendo_top50tags-discogs-effnet-1"
+}

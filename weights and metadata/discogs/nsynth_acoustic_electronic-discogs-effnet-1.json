@@ -1,0 +1,78 @@
+{
+    "name": "nsynth acoustic electronic",
+    "type": "multi-class classifier",
+    "link": "https://essentia.upf.edu/models/classification-heads/nsynth_acoustic_electronic/nsynth_acoustic_electronic-discogs-effnet-1.pb",
+    "version": "1",
+    "description": "Source classification based on effnet_b0_3M pre-trained model and Nsynth dataset.",
+    "author": "Xavier Lizarraga",
+    "email": "xavier.lizarraga@upf.edu",
+    "release_date": "02/05/2023",
+    "framework": "tensorflow",
+    "framework_version": "2.7.1",
+    "programming_env": {
+        "language": "python",
+        "version": "3.7.13",
+        "others": ""
+    },
+    "classes": [
+        "acoustic",
+        "electronic"
+    ],
+    "model_types": [
+        "frozen_model"
+    ],
+    "dataset": {
+        "name": "Nsynth",
+        "size": "305979 examples",
+        "link": "https://magenta.tensorflow.org/datasets/nsynth",
+        "metrics": {
+            "5-fold_cross_validation_normalized_accuracy": 79.61
+        }
+    },
+    "schema": {
+        "inputs": [
+            {
+                "name": "model/Placeholder",
+                "type": "float",
+                "shape": [
+                    "batch_size",
+                    1280
+                ]
+            }
+        ],
+        "outputs": [
+            {
+                "name": "model/Softmax",
+                "type": "float",
+                "shape": [
+                    "batch_size",
+                    2
+                ],
+                "op": "Softmax",
+                "description": "output layer",
+                "output_purpose": "predictions"
+            },
+            {
+                "name": "model/dense/BiasAdd",
+                "type": "float",
+                "shape": [
+                    "batch_size",
+                    100
+                ],
+                "op": "fully connected",
+                "description": "penultimate layer",
+                "output_purpose": ""
+            }
+        ]
+    },
+    "citation": "",
+    "inference": {
+        "sample_rate": 16000,
+        "algorithm": "TensorflowPredict2D",
+        "embedding_model": {
+            "algorithm": "TensorflowPredictEffnetDiscogs",
+            "model_name": "discogs-effnet-bs64-1",
+            "link": "https://essentia.upf.edu/models/music-style-classification/discogs-effnet/discogs-effnet-bs64-1.pb"
+        }
+    }
+}
