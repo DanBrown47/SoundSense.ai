@@ -414,14 +414,15 @@
 
                             <div class="music-playlist-two">
                                 <ul class="hit-plalist">
+                                    {% for song in songs %}
                                     <li>
-                                        <a href="media/audio/happy_life.mp3" class="sm2_button"><i></i></a>
-                                        <span class="song-name">Happy Life</span>
+                                        <a href="media/{{song.audio_file}}" class="sm2_button"><i></i></a>
+                                        <span class="song-name">{{song.title}}</span>
                                         <span class="dur">04.12</span>
                                         <a href="#" class="video-song"><i class="fa fa-video-camera"></i></a>
                                         <a href="#" class="song-download"><i class="fa fa-download"></i></a>
                                     </li>
-
+                                    {% endfor %}
                                     <li>
                                         <a href="media/audio/island.mp3" class="sm2_button"><i></i></a>
                                         <span class="song-name">Island - MBB</span>
@@ -665,5 +666,21 @@
     <!-- /.container -->
 </section>
 <!-- /#newsletter -->
+
+<script>
+
+    var all_songs_js = [];
+
+    {% for song in songs %}
+        var new_song_dj = {
+            title: "{{song.title}}",
+            artist: "{{song.artist}}",
+            m4a: "media/{{song.audio_file}}",
+            poster: "media/{{song.artwork}}"
+        };
+        all_songs_js.push(new_song_dj);
+    {% endfor %}
+
+</script>
 
 {% endblock %}

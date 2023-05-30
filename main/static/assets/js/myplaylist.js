@@ -1,55 +1,20 @@
 jQuery(document).ready(function($) {
   "use strict";
 
+  console.log(all_songs_js);
   /* Banner Player */
   $('#header_player').each(function() {
     var myPlaylist = new jPlayerPlaylist({
       jPlayer: "#main_player",
       cssSelectorAncestor: "#header_player"
-    }, [{
-        title: 'Happy Life',
-        artist: 'Derwood Spinks',
-        mp3: 'media/audio/happy_life.mp3',
-        poster: "media/audio/01.jpg",
-      },
-      {
-        title: 'King Magicians',
-        artist: 'Dan Mustaine',
-        mp3: 'media/audio/02.mp3',
-        poster: "media/audio/02.jpg",
-      },
-      {
-        title: 'Leaving it Behind',
-        artist: 'RZ Project',
-        mp3: 'media/audio/03.mp3',
-        poster: "media/audio/03.jpg"
-      },
-      {
-        title: 'Bloodborne',
-        artist: 'Chester Ray Banton',
-        mp3: 'media/audio/04.mp3',
-        poster: "media/audio/04.jpg"
-      },
-      {
-        title: 'When Spells',
-        artist: 'Dan Mustaine',
-        mp3: 'media/audio/05.mp3',
-        poster: "media/audio/05.jpg"
-      },
-      {
-        title: 'When Spells',
-        artist: 'Derwood Spinks',
-        mp3: 'media/audio/06.mp3',
-        poster: "media/audio/06.jpg"
-      }
-    ], {
+    }, all_songs_js, {
       playlistOptions: {
         enableRemoveControls: true,
         html: '.play',
         // autoPlay: true,
       },
       swfPath: "dependencies/jPlayer/js",
-      supplied: "oga, mp3",
+      supplied: "oga, mp3, m4a",
       wmode: "window",
       useStateClassSkin: true,
       toggleDuration: true,
@@ -150,7 +115,7 @@ jQuery(document).ready(function($) {
     }
   ], {
     swfPath: "../../dist/jplayer",
-    supplied: "oga, mp3",
+    supplied: "oga, mp3, m4a",
     wmode: "window",
     useStateClassSkin: true,
     autoBlur: false,

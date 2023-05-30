@@ -14,7 +14,7 @@ class Song(models.Model):
     released = models.DateField(null=True, blank=True)
     album_artist = models.CharField(max_length=80, blank=True, null=True)
     track_number = models.PositiveSmallIntegerField(blank=True, null=True, default=None)
-    artwork = models.ImageField(upload_to='cover_images', default='cover_images/default.jpg', blank=True, null=True)
+    artwork = models.ImageField(upload_to='cover_images', default='cover_images/default.png', blank=True, null=True)
     lyrics = RichTextField(blank=True, null=True)
     processed = models.BooleanField(default=False)
 
@@ -44,11 +44,11 @@ def fill_database_with_metadata(sender, instance, created, *args, **kwargs):
     if created:
         file_field = instance.audio_file
         if file_field and file_field.file:
-            audio_file = file_field.file
+            audio_file = str(file_field.file)
+            file_name = ".".join(audio_file.split('media/audio/')[1].split('.')[:-1])
             try:
-                audio = music_tag.load_file(str(audio_file))
+                audio = music_tag.load_file(audio_file)
                 print("audio loaded")
-                print(instance.artwork)
                 instance.title = audio['tracktitle'] if instance.title  == None and 'tracktitle' in audio.tag_map.keys() else None
                 instance.artist = audio['artist'] if instance.artist  == None and 'artist' in audio.tag_map.keys() else None
                 instance.album = audio['album'] if instance.album  == None and 'album' in audio.tag_map.keys() else None
@@ -57,9 +57,11 @@ def fill_database_with_metadata(sender, instance, created, *args, **kwargs):
                 instance.lyrics = str(audio['lyrics']) if instance.lyrics  == None and 'lyrics' in audio.tag_map.keys() else None
                 instance.duration = timedelta(seconds=int(audio['#length'])) if instance.duration  == None and '#length' in audio.tag_map.keys() else None
                 #instance.released = datetime(year=int(audio['year'])) if instance.released  == None and 'year' in audio.tag_map.keys() else None
-                #instance.artwork = audio['artwork'].first.thumbnail([500, 500]) if instance.artwork  == 'cover_images/default.jpg' and 'artwork' in audio.tag_map.keys() else None
-                instance.artwork.save('image.jpg', audio['artwork'].first.thumbnail([500, 500]), save=True)
-                print(instance.artwork)
+                if instance.artwork  == 'cover_images/default.png' and 'artwork' in audio.tag_map.keys():
+                    pil_image = audio['artwork'].first.thumbnail([500, 500])
+                    image_file = "media/cover_images/" + file_name + ".jpg"
+                    pil_image.save(image_file)
+                    instance.artwork = "cover_images/" + file_name + ".jpg"
                 instance.save()
             except:
                 print("Unsupported format")
