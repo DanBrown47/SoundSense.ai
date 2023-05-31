@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<section id="banner-one">
+    <div class="swiper-container banner-slider-two" data-swiper-config='{"loop": true, "effect": "slide", "prevButton":"#banner-nav-prev", "nextButton": "#banner-nav-next", "speed": 700, "autoplay": 500000, "paginationClickable": true}'>
+
+        <div class="swiper-wrapper">
+            <div class="swiper-slide" data-bg-image="/media/banner/5.jpg" data-parallax="image">
+
+                <div class="slider-content-two content-three" data-animate="fadeIn">
+                    <div class="content">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            <form method="post" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <label for="exampleFormControlFile1">Select songs</label>
+                                    {{ form.file }}
+                                </div>
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- /.slider-content -->
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}
