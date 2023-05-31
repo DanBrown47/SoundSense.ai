@@ -52,25 +52,26 @@ def fill_database_with_metadata(sender, instance, created, *args, **kwargs):
         if file_field and file_field.file:
             audio_file = str(file_field.file)
             file_name = ".".join(audio_file.split('media/audio/')[1].split('.')[:-1])
-            #try:
-            audio = music_tag.load_file(audio_file)
-            #print("audio loaded")
-            instance.title = audio['tracktitle'] if instance.title  == None and 'tracktitle' in audio.tag_map.keys() else None
-            instance.artist = audio['artist'] if instance.artist  == None and 'artist' in audio.tag_map.keys() else None
-            instance.album = audio['album'] if instance.album  == None and 'album' in audio.tag_map.keys() else None
-            instance.album_artist = audio['albumartist'] if instance.album_artist  == None and 'albumartist' in audio.tag_map.keys() else None
-            instance.track_number = audio['tracknumber'] if instance.track_number  == None and 'tracknumber' in audio.tag_map.keys() else None
-            instance.lyrics = audio['lyrics'] if instance.lyrics  == None and 'lyrics' in audio.tag_map.keys() else None
-            instance.duration = timedelta(seconds=int(audio['#length'])) if instance.duration  == None and '#length' in audio.tag_map.keys() else None
-            instance.released = datetime(year=int(audio['year']),month=1, day=1) if instance.released  == None and 'year' in audio.tag_map.keys() else None
-            if instance.artwork  == 'cover_images/default.png' and 'artwork' in audio.tag_map.keys():
-                pil_image = audio['artwork'].first.thumbnail([500, 500])
-                image_file = "media/cover_images/" + file_name + ".jpg"
-                pil_image.save(image_file)
-                instance.artwork = "cover_images/" + file_name + ".jpg"
-            instance.save()
-            #except:
-            #    print("Unsupported format")
+            try:
+                audio = music_tag.load_file(audio_file)
+                #print("audio loaded")
+                instance.title = audio['tracktitle'] if instance.title  == None and 'tracktitle' in audio.tag_map.keys() else None
+                instance.artist = audio['artist'] if instance.artist  == None and 'artist' in audio.tag_map.keys() else None
+                instance.album = audio['album'] if instance.album  == None and 'album' in audio.tag_map.keys() else None
+                instance.album_artist = audio['albumartist'] if instance.album_artist  == None and 'albumartist' in audio.tag_map.keys() else None
+                instance.track_number = audio['tracknumber'] if instance.track_number  == None and 'tracknumber' in audio.tag_map.keys() else None
+                instance.lyrics = audio['lyrics'] if instance.lyrics  == None and 'lyrics' in audio.tag_map.keys() else None
+                instance.duration = timedelta(seconds=int(audio['#length'])) if instance.duration  == None and '#length' in audio.tag_map.keys() else None
+                if instance.released  == None and 'year' in audio.tag_map.keys():
+                    instance.released = datetime(year=int(audio['year']),month=1, day=1)
+                if instance.artwork  == 'cover_images/default.png' and 'artwork' in audio.tag_map.keys():
+                    pil_image = audio['artwork'].first.thumbnail([500, 500])
+                    image_file = "media/cover_images/" + file_name + ".jpg"
+                    pil_image.save(image_file)
+                    instance.artwork = "cover_images/" + file_name + ".jpg"
+                instance.save()
+            except:
+                print("Unsupported format")
 
             #print(audio, type(audio))
 
@@ -79,7 +80,8 @@ post_save.connect(fill_database_with_metadata, Song)
 
 def delete_files(sender, instance, *args, **kwargs):
     instance.audio_file.delete(False)
-    instance.artwork.delete(False)
+    if instance.artwork.name != 'cover_images/default.png':
+        instance.artwork.delete(False)
 
 pre_delete.connect(delete_files, Song)
 
