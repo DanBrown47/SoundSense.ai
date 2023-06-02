@@ -4,6 +4,7 @@ from ckeditor.fields import RichTextField
 from django.db.models.signals import pre_delete, post_save
 from datetime import timedelta, datetime
 import music_tag
+from .choices import tags, genres
 
 class Song(models.Model):
     original_filename = models.CharField(max_length=300, blank=True)
@@ -25,24 +26,19 @@ class Song(models.Model):
         else:
             return str(self.title) + " - " + str(self.artist)
 
-#class Song_ID(models.Model):
-
-ALL_TAGS = (("ambient", "Ambient"),
-            ("classical", "Classical"),
-            ("electronic", "Electronic"),
-            ("indie", "Indie"),
-            ("metal", "Metal"),
-            ("orchestral", "Orchestral"),
-            ("pop", "Pop"),
-            ("rock", "Rock"),
-            ("funk", "Funk"),
-            ("hiphop", "Hip-hop"),
-            ("techno", "Techno"))
-
-class Tags(models.Model):
-    name = models.CharField(max_length=25, choices=ALL_TAGS, null=True, default=None, blank=True)
+class Genre(models.Model):
+    name = models.CharField(max_length=35, choices=genres, null=True, default=None, blank=True)
     song = models.ForeignKey(Song, on_delete=models.CASCADE)
+    score = models.DecimalField(max_digits=8, decimal_places=4, blank=True, null=True)
 
+    def __str__(self):
+        return self.name
+
+class Tag(models.Model):
+    name = models.CharField(max_length=35, choices=tags, null=True, default=None, blank=True)
+    song = models.ForeignKey(Song, on_delete=models.CASCADE)
+    score = models.DecimalField(max_digits=8, decimal_places=4, blank=True, null=True)
+    
     def __str__(self):
         return self.name
     
@@ -55,20 +51,27 @@ def fill_database_with_metadata(sender, instance, created, *args, **kwargs):
             try:
                 audio = music_tag.load_file(audio_file)
                 #print("audio loaded")
-                instance.title = audio['tracktitle'] if instance.title  == None and 'tracktitle' in audio.tag_map.keys() else None
-                instance.artist = audio['artist'] if instance.artist  == None and 'artist' in audio.tag_map.keys() else None
-                instance.album = audio['album'] if instance.album  == None and 'album' in audio.tag_map.keys() else None
-                instance.album_artist = audio['albumartist'] if instance.album_artist  == None and 'albumartist' in audio.tag_map.keys() else None
-                instance.track_number = audio['tracknumber'] if instance.track_number  == None and 'tracknumber' in audio.tag_map.keys() else None
-                instance.lyrics = audio['lyrics'] if instance.lyrics  == None and 'lyrics' in audio.tag_map.keys() else None
-                instance.duration = timedelta(seconds=int(audio['#length'])) if instance.duration  == None and '#length' in audio.tag_map.keys() else None
-                if instance.released  == None and 'year' in audio.tag_map.keys():
+                instance.title = audio['tracktitle'] if instance.title == None and 'tracktitle' in audio.tag_map.keys() else instance.title
+                instance.artist = audio['artist'] if instance.artist == None and 'artist' in audio.tag_map.keys() else instance.artist
+                instance.album = audio['album'] if instance.album == None and 'album' in audio.tag_map.keys() else instance.album
+                instance.album_artist = audio['albumartist'] if instance.album_artist == None and 'albumartist' in audio.tag_map.keys() else instance.album_artist
+                instance.track_number = audio['tracknumber'] if instance.track_number == None and 'tracknumber' in audio.tag_map.keys() else instance.track_number
+
+                if instance.lyrics == None and 'lyrics' in audio.tag_map.keys():
+                    instance.lyrics = audio['lyrics'] 
+                instance.duration = timedelta(seconds=int(audio['#length'])) if instance.duration == None and '#length' in audio.tag_map.keys() else instance.duration
+
+                if (instance.released == None) and ('year' in audio.tag_map.keys()) and str(audio['year']) != "":
                     instance.released = datetime(year=int(audio['year']),month=1, day=1)
-                if instance.artwork  == 'cover_images/default.png' and 'artwork' in audio.tag_map.keys():
-                    pil_image = audio['artwork'].first.thumbnail([500, 500])
-                    image_file = "media/cover_images/" + file_name + ".jpg"
-                    pil_image.save(image_file)
-                    instance.artwork = "cover_images/" + file_name + ".jpg"
+
+                if instance.artwork == 'cover_images/default.png' and 'artwork' in audio.tag_map.keys():
+                    try:
+                        pil_image = audio['artwork'].first.thumbnail([500, 500])
+                        image_file = "media/cover_images/" + file_name + ".jpg"
+                        pil_image.save(image_file)
+                        instance.artwork = "cover_images/" + file_name + ".jpg"
+                    except:
+                        pass
                 instance.save()
             except:
                 print("Unsupported format")

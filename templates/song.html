@@ -414,7 +414,7 @@
 
                             <div class="music-playlist-two">
                                 <ul class="hit-plalist">
-                                    {% for song in songs %}
+                                    {% for song in similar_songs %}
                                     <li>
                                         <a href="/media/{{song.audio_file}}" class="sm2_button"><i></i></a>
                                         <span class="song-name">{{song.title}}</span>
@@ -671,7 +671,14 @@
 
     var all_songs_js = [];
 
-    {% for song in songs %}
+    const current_song_dj = {
+        title: "{{current_song.title}}",
+        artist: "{{current_song.artist}}",
+        m4a: "/media/{{current_song.audio_file}}",
+        poster: "/media/{{current_song.artwork}}"
+    };
+    all_songs_js.push(current_song_dj);
+    {% for song in similar_songs %}
         var new_song_dj = {
             title: "{{song.title}}",
             artist: "{{song.artist}}",

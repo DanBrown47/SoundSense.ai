@@ -1,0 +1,10 @@
+essentia-tensorflow
+django
+pandas
+django-ckeditor
+music-tag
+mysqlclient
+Pillow
+scikit-learn
+spotipy
+syrics

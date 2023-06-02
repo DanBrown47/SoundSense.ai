@@ -161,3 +161,5 @@ cython_debug/
 venv/
 All songs/
 All images/
+media/cover_images/
+media/audio/

@@ -1,0 +1,66 @@
+{
+      "danceability": [
+            "openl3",
+            "danceability-openl3-music-mel128-emb512-1"
+      ],
+      "mood_acoustic": [
+            "openl3",
+            "mood_acoustic-openl3-music-mel128-emb512-1"
+      ],
+      "mood_aggressive": [
+            "openl3",
+            "mood_aggressive-openl3-music-mel128-emb512-1"
+      ],
+      "mood_electronic": [
+            "openl3",
+            "mood_electronic-openl3-music-mel128-emb512-1"
+      ],
+      "mood_happy": [
+            "openl3",
+            "mood_happy-openl3-music-mel128-emb512-1"
+      ],
+      "mood_party": [
+            "openl3",
+            "mood_party-openl3-music-mel128-emb512-1"
+      ],
+      "mood_relaxed": [
+            "openl3",
+            "mood_relaxed-openl3-music-mel128-emb512-1"
+      ],
+      "mood_sad": [
+            "openl3",
+            "mood_sad-openl3-music-mel128-emb512-1"
+      ],
+      "tonal_atonal": [
+            "openl3",
+            "tonal_atonal-openl3-music-mel128-emb512-1"
+      ],
+      "voice_gender": [
+            "openl3",
+            "gender-openl3-music-mel128-emb512-1"
+      ],
+      "voice_instrumental": [
+            "openl3",
+            "voice_instrumental-openl3-music-mel128-emb512-1"
+      ],
+      "Engagement": [
+            "discogs",
+            "engagement_regression-discogs-effnet-1"
+      ],
+      "Nsynth_Reverb": [
+            "discogs",
+            "nsynth_reverb-discogs-effnet-1"
+      ],
+      "Instrument": [
+            "discogs",
+            "mtg_jamendo_instrument-discogs-effnet-1"
+      ],
+      "Genre": [
+            "discogs",
+            "mtg_jamendo_genre-discogs-effnet-1"
+      ],
+      "Tag": [
+            "discogs",
+            "mtg_jamendo_top50tags-discogs-effnet-1"
+      ]
+}

@@ -1,0 +1,53 @@
+{
+    "name": "OpenL3",
+    "type": "embedding extraction",
+    "link": "https://essentia.upf.edu/models/feature-extractors/openl3/openl3-music-mel128-emb512-3.pb",
+    "version": "1",
+    "description": "self-supervided model for embedding extraction",
+    "author": "Pablo Alonso",
+    "email": "pablo.alonso@upf.edu",
+    "release_date": "2020-09-28",
+    "framework": "tensorflow",
+    "framework_version": "1.15.2",
+    "programming_env": {
+        "language": "Python",
+        "version": "3.6"
+    },
+    "model_types": [
+        "frozen_model"
+    ],
+    "dataset": {
+        "name": "subset of videos with musical content from Audioset",
+        "size": "296K",
+        "link": [
+            "https://research.google.com/audioset/"
+        ]
+    },
+    "schema": {
+        "inputs": [
+            {
+                "name": "melspectrogram",
+                "type": "float",
+                "shape": [
+                    199,
+                    128
+                ]
+            }
+        ],
+        "outputs": [
+            {
+                "name": "embeddings",
+                "op": "Identily",
+                "shape": [
+                    512
+                ],
+                "output_purpose": "predictions"
+            }
+        ]
+    },
+    "citation": "@inproceedings{cramer2019look,\ntitle={Look, listen, and learn more: Design choices for deep audio embeddings},\nauthor={Cramer, Jason and Wu, Ho-Hsiang and Salamon, Justin and Bello, Juan Pablo},\nbooktitle={ICASSP 2019-2019 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)},\npages={3852--3856},\nyear={2019},\norganization={IEEE}\n}",
+    "inference": {
+        "sample_rate": 48000,
+        "algorithm": "N/A"
+    }
+}

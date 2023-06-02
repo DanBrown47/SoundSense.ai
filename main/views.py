@@ -1,6 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
+from django.db.models import Case, When
 from . models import Song
 from .forms import SongForm
+from .utils import get_similar_songs_id, train_model, update_songs_in_database_to_csv, update_csv_files_upon_model_deletion
 
 def home(request):
     songs = Song.objects.all()
@@ -9,14 +11,26 @@ def home(request):
     }
     return render(request, 'home.html', context)
 
-def song(request):
-    songs = Song.objects.all()
-    song = songs.first()
+def song(request, song_id):
+    current_song = get_object_or_404(Song, id=song_id)    
+    similar_songs_id = get_similar_songs_id(song_id)
+    order_expression = Case(*[When(id=id_val, then=pos) for pos, id_val in enumerate(similar_songs_id)],default=len(similar_songs_id))
+    matching_models = Song.objects.filter(id__in=similar_songs_id).order_by(order_expression)
+    
     context = {
-        'songs': songs
+        'current_song': current_song,
+        'similar_songs': matching_models
     }
-    print(song.audio_file.name)
     return render(request, 'song.html', context)
+
+def update_csv_files(request):
+    update_songs_in_database_to_csv()
+    update_csv_files_upon_model_deletion()
+    return redirect(request.META['HTTP_REFERER'])
+
+def retrain_model(request):
+    train_model()
+    return redirect(request.META['HTTP_REFERER'])
 
 def upload_music(request):
     if request.method == "POST":
@@ -26,6 +40,7 @@ def upload_music(request):
             for file in files:
                 real_name = ".".join(str(file).split('.')[:-1])
                 Song.objects.create(audio_file=file, original_filename=real_name)
+            update_songs_in_database_to_csv()
     else:
         songform = SongForm()  
     return render(request, 'upload_music.html', {'form':songform})

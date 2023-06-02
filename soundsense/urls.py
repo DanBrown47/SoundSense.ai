@@ -26,6 +26,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),
     path('upload/', views.upload_music, name='upload'),
-    path('song/', views.song, name='song')
+    path('song/<int:song_id>', views.song, name='song'),
+    path('retrain/', views.retrain_model, name='retrain'),
+    path('update_csvs/', views.update_csv_files, name='update_csv')
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
