@@ -15,11 +15,9 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
-from django.urls import re_path as url
-from django.views.static import serve
 from main import views
 
 urlpatterns = [
@@ -28,6 +26,7 @@ urlpatterns = [
     path('upload/', views.upload_music, name='upload'),
     path('song/<int:song_id>', views.song, name='song'),
     path('retrain/', views.retrain_model, name='retrain'),
-    path('update_csvs/', views.update_csv_files, name='update_csv')
+    path('update_csvs/', views.update_csv_files, name='update_csv'),
+    path('update_others/', views.update_genre_tags_processed, name='update_others')
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

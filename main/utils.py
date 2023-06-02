@@ -3,11 +3,12 @@ from sklearn.preprocessing import MinMaxScaler
 from sklearn.metrics.pairwise import cosine_similarity
 from essentia.standard import  MonoLoader, TensorflowPredict2D, TensorflowPredictEffnetDiscogs
 import numpy as np
-from .models import Song
+from .models import Song, Genre, Tag
 import json
 from data.OpenL3_embeddings import EmbeddingsOpenL3
 from main.choices import genre_weightage, tags_weightage, instrument_weightage, feature_weights
 from pipeline_code import embedding_model_weights_dsg, embedding_model_weights_l3, all_columns_to_drop, rename_labels
+import ast
 
 def get_similar_songs_id(id):
     df = pd.read_csv('data/songs_db.csv')
@@ -177,3 +178,29 @@ def update_csv_files_upon_model_deletion():
     df_features.to_csv('data/song_dataset_final.csv', index=False)
 
 
+def fill_genres_and_tags():
+    songs = Song.objects.all()
+    #songs = songs[:6]
+    
+    df = pd.read_csv('data/song_dataset_final.csv')
+    for song in songs:
+        if df['song name'].isin([song.original_filename]).any():
+            song.processed = True
+            if Genre.objects.filter(song=song).count() == 0:
+                song_data = df[df['song name'] == song.original_filename]
+                top_genres = song_data['top_genres'].tolist()[0]
+                top_genres = ast.literal_eval(top_genres)
+                for genre in top_genres:
+                    score = song_data[genre].values[0]
+                    Genre.objects.create(name=genre, song=song, score=score)
+
+            if Tag.objects.filter(song=song).count() == 0:
+                song_data = df[df['song name'] == song.original_filename]
+                top_tags = song_data['top_tags'].tolist()[0]
+                top_tags = ast.literal_eval(top_tags)
+                for tag in top_tags:
+                    score = song_data[tag].values[0]
+                    Tag.objects.create(name=tag, song=song, score=score)
+        else:
+            song.processed = False
+        song.save()
