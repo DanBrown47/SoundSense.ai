@@ -6,5 +6,6 @@
 5. Admin authentication
 6. Fine tune feature weights
 7. Auto tag and genre assign button - done
-8. Experimental: Combine data with metadata scores
+8. Experimental: Combine data with metadata scores - done
+9. Adjust tags and genre weights, some are too biased to electronic music
 

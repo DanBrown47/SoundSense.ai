@@ -7,7 +7,7 @@ import music_tag
 from .choices import tags, genres
 
 class Song(models.Model):
-    original_filename = models.CharField(max_length=300, blank=True)
+    original_filename = models.CharField(max_length=300, blank=True, unique=True)
     title = models.CharField(max_length=150, blank=True, null=True)
     audio_file = models.FileField(max_length=350, upload_to='audio', validators=[FileExtensionValidator( ['m4a','mp3','wav'] )])
     artist = models.CharField(max_length=250, blank=True, null=True)
@@ -17,7 +17,8 @@ class Song(models.Model):
     album_artist = models.CharField(max_length=250, blank=True, null=True)
     track_number = models.PositiveSmallIntegerField(blank=True, null=True, default=None)
     artwork = models.ImageField(max_length=350, upload_to='cover_images', default='cover_images/default.png', blank=True, null=True)
-    lyrics = RichTextField(blank=True, null=True)
+    #lyrics = RichTextField(blank=True, null=True)
+    lyrics = models.TextField(null=True, blank=True)
     processed = models.BooleanField(default=False)
 
     def __str__(self):
@@ -58,7 +59,8 @@ def fill_database_with_metadata(sender, instance, created, *args, **kwargs):
                 instance.track_number = audio['tracknumber'] if instance.track_number == None and 'tracknumber' in audio.tag_map.keys() else instance.track_number
 
                 if instance.lyrics == None and 'lyrics' in audio.tag_map.keys():
-                    instance.lyrics = audio['lyrics'] 
+                    instance.lyrics = str(audio['lyrics']).replace('\n', '<br>')
+                
                 instance.duration = timedelta(seconds=int(audio['#length'])) if instance.duration == None and '#length' in audio.tag_map.keys() else instance.duration
 
                 if (instance.released == None) and ('year' in audio.tag_map.keys()) and str(audio['year']) != "":

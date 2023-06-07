@@ -16,8 +16,17 @@ feature_weights = {
 'Reverb_wet' : 0.55,
 'voice_female' : 1,
 'voice_male' : 1,
-'overall_voice' : 1.2
+'overall_voice' : 1.2,
+'year' : 0.5
 }
+
+normalizing_factor = 1.3
+normalizing_factor_meta = 0.6
+balancing_factor = 0.5
+
+
+mdata_outliers = ('music lab collective','various artists','halamithi habibo','my best collection','original motion picture soundtrack',
+            'original television soundtrack','bollywoods musical extravaganza','original music picture soundtrack','music from the motion picture')
 
 genres = (('Genre_acidjazz', 'Acidjazz'),
  ('Genre_ambient', 'Ambient'),

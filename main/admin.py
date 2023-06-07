@@ -13,9 +13,10 @@ class Song_Admin(admin.ModelAdmin):
     
     def save_model(self, request, obj, form, change):
         if request.FILES.get('audio_file'):
-            original_filename = request.FILES['audio_file'].name
-            real_name = ".".join(original_filename.split('.')[:-1])
-            obj.original_filename = real_name
+            if obj.original_filename == None or obj.original_filename == "":
+                original_filename = request.FILES['audio_file'].name
+                real_name = ".".join(original_filename.split('.')[:-1])
+                obj.original_filename = real_name
         # Save the model
         super().save_model(request, obj, form, change)
 
