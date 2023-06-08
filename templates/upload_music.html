@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<section id="banner-one">
+    <div class="swiper-container banner-slider-two" data-swiper-config='{"loop": true, "effect": "slide", "prevButton":"#banner-nav-prev", "nextButton": "#banner-nav-next", "speed": 700, "autoplay": 500000, "paginationClickable": true}'>
+
+        <div class="swiper-wrapper">
+            <div class="swiper-slide" data-bg-image="/media/banner/5.jpg" data-parallax="image">
+                
+                <div class="slider-content-two content-three" data-animate="fadeIn">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label>Select songs</label>
+                            {{ form.file }}
+                        </div>
+                        <button type="submit" class="btn btn-primary">Upload</button>
+                    </form><br>
+                    <a href="{% url 'update_csv' %}"><button type="button" class="btn btn-primary">Update Data</button></a><br>
+                    <a href="{% url 'update_others' %}"><button type="button" class="btn btn-primary">Update Tags and Genre</button></a><br><br>
+                    <a href="{% url 'retrain' %}"><button type="button" class="btn btn-danger">Retrain Model</button></a>
+                </div>
+                
+                <!-- /.slider-content -->
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}

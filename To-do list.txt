@@ -1,0 +1,11 @@
+[not in any particular order]
+1. Option to upload file and search for similar songs on the fly without touching the database
+2. On the song-play page, add details of current song and cards/sliders of similar songs - done
+3. Create an all songs page with filters and pagination 
+4. Search song functionality
+5. Admin authentication
+6. Fine tune feature weights
+7. Auto tag and genre assign button - done
+8. Experimental: Combine data with metadata scores - done
+9. Adjust tags and genre weights, some are too biased to electronic music
+

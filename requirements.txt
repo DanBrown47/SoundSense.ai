@@ -1,0 +1,6 @@
+essentia-tensorflow==2.1b6.dev1034
+Django==4.2.1
+pandas==2.0.1
+music-tag==0.4.3
+Pillow==9.5.0
+scikit-learn==1.2.2
