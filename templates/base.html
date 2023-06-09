@@ -2,7 +2,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-
 <!-- Mirrored from themeim.com/demo/milando/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 22 May 2023 16:22:52 GMT -->
 <head>
     <!-- Meta Data -->
@@ -50,20 +49,13 @@
 
 <body id="home-version-1" class="home-version-1" data-style="default" style="background-color: #111111;">
 
-
 	<div id="site">
-
-
 
 		<!--=========================-->
 		<!--=        Navbar         =-->
 		<!--=========================-->
 		
         {% include  'includes/header.html' %}
-
-        {% include  'includes/offset.html' %}
-
-
 
 		<!--=============================-->
 		<!--=        Mobile Nav         =-->
@@ -77,11 +69,6 @@
 
         {% endblock %}
 
-
-		<div class="backtotop">
-			<i class="fa fa-angle-up backtotop_btn"></i>
-		</div>
-
         <script>
 
             var all_songs_js = [];
@@ -92,16 +79,6 @@
                 m4a: "/media/{{current_song.audio_file}}",
                 poster: "/media/{{current_song.artwork}}"
             };
-            all_songs_js.push(current_song_dj);
-            {% for song in similar_songs %}
-                var new_song_dj = {
-                    title: "{{song.title}}",
-                    artist: "{{song.artist}}",
-                    m4a: "/media/{{song.audio_file}}",
-                    poster: "/media/{{song.artwork}}"
-                };
-                all_songs_js.push(new_song_dj);
-            {% endfor %}
         
         </script>
 	</div>
@@ -138,9 +115,7 @@
     <!-- Site Scripts -->
     <script src="{% static 'assets/js/app.js' %}"></script>
 
-
 </body>
-
 
 <!-- Mirrored from themeim.com/demo/milando/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 22 May 2023 16:23:48 GMT -->
 </html>
