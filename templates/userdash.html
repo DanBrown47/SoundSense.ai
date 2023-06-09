@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<section class="section-padding">
+    <div class="tim-container">
+        <div class="row">
+            <div class="section-title style-four">
+                <h2>WELCOME, {{request.user.username}}</h2>
+                <p>Welcome to your Dashboard.</p>
+                <a href="{% url 'logout'%}"><button type="button" class="btn btn-danger">Logout</button></a>
+            </div>
+        </div>
+        <div class="row">
+            
+            <div class="col-lg-4 col-md-10 col-sm-12 mx-auto">
+                <div class="single-album-info"><div class="single-album-details" style="padding:14px 61px 28px 0px">
+                    <div class="details-top">
+                        <h6>Find similar songs using our AI</h6>
+                    </div>
+                </div></div>
+
+                <form method="post" enctype="multipart/form-data" style="display:none">
+                    {% csrf_token %}
+                </form>
+
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form_song.as_p}}
+                    <button type="submit" class="btn btn-primary" name="form_song">Upload</button>
+                </form>
+
+                <div class="single-album-info"><div class="single-album-details" style="padding:14px 61px 28px 0px">
+                    <div class="details-top">
+                        <h6>Customize your recommendations</h6>
+                    </div>
+                </div></div>
+                <form method="post">
+                    {% csrf_token %}
+                    
+                    {{ form_pref.as_p }}
+                    
+                    <button type="submit" class="btn btn-primary" name="form_pref">Submit</button>
+                  </form>
+
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+{% endblock %}

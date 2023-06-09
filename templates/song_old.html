@@ -1,0 +1,206 @@
+{% extends 'base_old.html' %}
+{% load static %}
+
+{% block content %}
+
+<section id="banner-one">
+    <div class="swiper-container banner-slider-two" data-swiper-config='{"loop": true, "effect": "slide", "prevButton":"#banner-nav-prev", "nextButton": "#banner-nav-next", "speed": 700, "autoplay": 500000, "paginationClickable": true}'>
+
+        <div class="swiper-wrapper">
+            <div class="swiper-slide" data-bg-image="/media/banner/5.jpg" data-parallax="image">
+
+                <div class="slider-content-two content-three" data-animate="fadeIn">
+                    <img src="/media/{{current_song.artwork}}" alt="Music">
+                    <div class="content text-center">
+                        <h3 data-animate="fadeInUp">{{current_song.artist}}</h3>
+                        <h2 data-animate="fadeInUp" data-delay="0.5s">{{current_song.title}}</h2>
+
+                    </div>
+                </div>
+                <!-- /.slider-content -->
+            </div>
+        </div>
+
+        <div class="header_player">
+            <div class="tim-container ">
+                <!-- Audio Player -->
+                <div class="player-container">
+                    <div class="current-tracks">
+                        <div id="main_player" class="jp-jplayer">
+
+                        </div>
+                        <div id="nowPlaying">
+                            <h3 class="track-name"></h3>
+                            <span class="artist-name"></span>
+                        </div>
+                        <!-- #nowPlaying -->
+                    </div>
+                    <!-- /.current-tracks -->
+
+                    <div id="header_player" class="jp-audio" role="application" aria-label="media player">
+                        <div class="jp-type-playlist clearfix">
+                            <div class="jp-gui jp-interface">
+                                <div class="jp-controls">
+                                    <button class="jp-previous" tabindex="0"><i class="fa fa-backward"></i></button>
+                                    <button class="jp-play" tabindex="0"><i class="fa fa-play"></i></button>
+                                    <button class="jp-next" tabindex="0"><i class="fa fa-forward"></i></button>
+                                </div>
+                                <!-- Display the track inside player -->
+
+                                <div class="jp-progress">
+                                    <div class="jp-seek-bar">
+                                        <div class="jp-play-bar"></div>
+                                    </div>
+                                </div>
+
+                                <div class="jp-duration" role="timer" aria-label="duration"></div>
+
+                                <div class="vel-wrap">
+                                    <button class="jp-mute" tabindex="0"><i class="fa fa-volume-up"></i></button>
+
+                                    <div class="jp-volume-bar">
+                                        <div class="jp-volume-bar-value"></div>
+                                    </div>
+
+                                </div>
+                                <!-- /.vel-wrap -->
+
+                                <button id="playlist-toggle" class=""><i class="fa fa-list"></i></button>
+
+                                <!-- Playlist -->
+                                <div class="jp-playlist">
+                                    <ul>
+                                        <li></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.header_player -->
+    </div>
+</section>
+
+<div class="container">
+    <div class="row single-album-info">
+
+     
+        <!-- /.col-lg-6 -->
+
+        <div class="col-md-6 padding-remove">
+            <div class="single-album-details">
+                <div class="details-top">
+                    <h6>Description</h6>
+                </div>
+
+                <ul>
+
+                    {% if current_song.title %}<li>Title <span>{{current_song.title}}</span></li>{% endif %}
+                    {% if current_song.artist %}<li>Artist <span>{{current_song.artist}}</span></li>{% endif %}
+                    {% if current_song.album %}<li>Album <span>{{current_song.album}}</span></li>{% endif %}
+                    {% if current_song.album_artist %}<li>Album artist <span>{{current_song.album_artist}}</span></li>{% endif %}
+                    {% if current_song.track_number %}<li>Track number <span>{{current_song.track_number}}</span></li>{% endif %}
+                    {% if current_song.released %}<li>Release year <span>{{current_song.released|date:"Y"}}</span></li>{% endif %}
+
+                    {% if current_song.genre_set.count > 0 %}<li>Genre <span>{{current_song.genre_set.first.get_name_display}}</span></li>{% endif %}
+                    {% if current_song.duration %}<li>Duration <span>{{current_song.duration}}</span></li>{% endif %}
+
+                    {% if current_song.tag_set.count > 0 %}<li>Tags <span>{% for tag in current_song.tag_set.all %}{{tag.get_name_display}}{% if not forloop.last %}, {% endif %}{% endfor %}</span></li>{% endif %}
+
+                </ul>
+
+            </div>
+        </div>
+        <!-- /.col-lg-6 -->
+
+        <div class="col-md-6 padding-remove">
+            <div class="single-album-details">
+                <div class="details-top">
+                    <h6>Lyrics</h6>
+                </div>
+
+                <ul>{{current_song.lyrics|safe}}</ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.row -->
+</div>
+
+<!--===========================-->
+<!--=        	Album         =-->
+<!--===========================-->
+
+<section id="tranding-album">
+    <div class="tim-container">
+
+        <div class="section-title text-center">
+            <h2>You <span>May Also Like</span></h2>
+            <p>Similar songs based on SoundSense.ai</p>
+        </div>
+        <!-- /.section-title -->
+
+
+        <div class="album-boxs">
+            <div class="row">
+
+                {% for song in similar_songs %}
+                <div class="col-lg-3 col-md-5 col-6 col-full-width">
+                    <div class="album-box">
+                        <div class="box-thumb">
+                            <img src="/media/{{song.artwork}}" alt="album">
+                        </div>
+
+                        <div class="album-details clearfix">
+                            <div class="content">
+                                <h3 class="album-name" title="{{song.title}}"><a href="{% url 'song' song.id %}">{{song.title|truncatechars:22}}</a></h3>
+                                <p title="{{song.artist}}">{{song.artist|truncatechars:30}}</p>
+                            </div>
+
+                            <div class="icon float-right">
+                                <i class="tim-headphones"></i>
+                            </div>
+                        </div>
+                        <!-- /.album-details clearfix -->
+                    </div>
+                    <!-- /.album-box -->
+                </div>
+                <!-- /.col-lg-3 -->
+                {% endfor %}
+
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.album-boxs -->
+    </div>
+    <!-- /.tim-container -->
+</section>
+
+
+
+
+<script>
+
+    var all_songs_js = [];
+
+    const current_song_dj = {
+        title: "{{current_song.title}}",
+        artist: "{{current_song.artist}}",
+        m4a: "/media/{{current_song.audio_file}}",
+        poster: "/media/{{current_song.artwork}}"
+    };
+    all_songs_js.push(current_song_dj);
+    {% for song in similar_songs %}
+        var new_song_dj = {
+            title: "{{song.title}}",
+            artist: "{{song.artist}}",
+            m4a: "/media/{{song.audio_file}}",
+            poster: "/media/{{song.artwork}}"
+        };
+        all_songs_js.push(new_song_dj);
+    {% endfor %}
+
+</script>
+
+{% endblock %}

@@ -1,5 +1,15 @@
 from django.contrib import admin
-from .models import Song, Tag, Genre
+from django.contrib.auth.admin import UserAdmin
+from django.contrib.auth.models import User
+from .models import Song, Tag, Genre, Preference
+
+class UserPreferenceInline(admin.StackedInline):
+    model = Preference
+    can_delete = False
+    #verbose_name_plural = 'User Profile'
+
+class CustomUserAdmin(UserAdmin):
+    inlines = (UserPreferenceInline,)
 
 class Song_Tags_Admin(admin.TabularInline):
     model = Tag
@@ -21,3 +31,6 @@ class Song_Admin(admin.ModelAdmin):
         super().save_model(request, obj, form, change)
 
 admin.site.register(Song, Song_Admin)
+admin.site.unregister(User)
+admin.site.register(User, CustomUserAdmin)
+ 

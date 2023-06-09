@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<section class="section-padding">
+    <div class="tim-container clearfix">
+        <div class="row">
+            <div class="section-title style-four">
+                <h2>LISTEN TO THE MUSIC YOU LIKE</h2>
+                <p>There are many variations of passages of Lorem Ipsum available but the majority have suffered alteration in some injected humour.</p>
+            </div>
+        </div>
+        <div class="row">
+
+            {% for song in page_obj %}
+            <div class="col-lg-3 col-md-4 col-6 col-full-width" style="padding-right: 10px;padding-left: 10px;padding-bottom: 10px;padding-top: 10px;">
+                <ul class="artist-line-wrapper">
+                    <li class="artist-single clearfix">
+                        <img src="/media/{{song.artwork}}" alt="">
+                        <a href="{% url 'song' song.id %}">
+                            <div class="artist-single-content">
+                                <h6>{{song.title}}</h6>
+                                <p>{{song.artist}}</p>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            {% endfor %}
+
+        
+        </div>
+        <div style="pagination center">
+            <div id="store-pagination" class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets center" style="margin: 0 auto">
+                {% if page_obj.has_previous %}
+                    <a href="?page={{ page_obj.previous_page_number }}"><span class="swiper-pagination-bullet"></span></a>
+                {% endif %}
+                
+                <span class="swiper-pagination-bullet swiper-pagination-bullet-active"></span>
+        
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}"><span class="swiper-pagination-bullet"></span></a>
+                {% endif %}
+            </div>
+        </div>
+        
+    </div>
+
+</section>
+
+{% endblock %}

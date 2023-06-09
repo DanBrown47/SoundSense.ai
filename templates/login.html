@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<section class="section-padding">
+    <div class="tim-container clearfix">
+        <div class="row">
+            <div class="section-title style-four">
+                <h2>LOGIN AS A USER</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3 col-md-6 col-sm-12 mx-auto">
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </form>
+                <br><br>
+                <a href="{% url 'register'%}"><button type="button" class="btn btn-info">Register Now</button></a>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+{% endblock %}

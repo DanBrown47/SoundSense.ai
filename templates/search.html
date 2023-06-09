@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<section class="section-padding">
+    <div class="tim-container clearfix">
+        <div class="container">
+            <div class="row">
+                <div class="section-title style-four">
+                    <h2>FIND YOUR FAVOURITE SONG</h2>
+                    <p>There are many variations of passages of Lorem Ipsum available but the majority have suffered alteration in some injected humour.</p>
+                </div>
+                <form method="get" class="form-inline col-lg-8 col-md-10 col-sm-12">
+                    <input type="text" class="form-control col-lg-4 col-md-10 col-sm-12 mb-2 mr-sm-2" name="title" placeholder="Title">
+                    <input type="text" class="form-control col-lg-4 col-md-10 col-sm-12 mb-2 mr-sm-2" name="artist" placeholder="Artist">
+
+                    <button type="submit" class="btn btn-primary mb-2">Search</button>
+                </form>
+            </div>
+            {% if song_results.count > 0 %}
+            <div class="single-album-info"><div class="single-album-details" style="padding:33px 59px 26px 0px">
+                <div class="details-top">
+                    <h6>Search Results</h6>
+                </div>
+            </div></div>
+            <div class="row">
+
+                {% for song in song_results %}
+                <div class="col-lg-3 col-md-4 col-6 col-full-width" style="padding-right: 10px;padding-left: 10px;padding-bottom: 10px;padding-top: 10px;">
+                    <ul class="artist-line-wrapper">
+                        <li class="artist-single clearfix">
+                            <img src="/media/{{song.artwork}}" alt="">
+                            <a href="{% url 'song' song.id %}">
+                                <div class="artist-single-content">
+                                    <h6>{{song.title}}</h6>
+                                    <p>{{song.artist}}</p>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                {% endfor %}
+
+            </div>
+
+            {% endif %}
+        </div>
+    </div>
+
+</section>
+
+{% endblock %}
