@@ -161,3 +161,7 @@ cython_debug/
 venv/
 media/cover_images/
 media/audio/
+data/songs_db.csv
+data/song_dataset_final.csv
+data/processed_songs.csv
+data/metadata.csv
