@@ -4,7 +4,6 @@
 
 
 <!-- Mirrored from themeim.com/demo/milando/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 22 May 2023 16:22:52 GMT -->
-
 <head>
     <!-- Meta Data -->
     <meta charset="utf-8">
@@ -33,98 +32,115 @@
     <!-- Site Stylesheet -->
     <link rel="stylesheet" href="{% static 'assets/css/woocommerce.css' %}" type="text/css">
     <link rel="stylesheet" href="{% static 'assets/css/app.css' %}" type="text/css">
-    <link id="theme" rel="stylesheet" href="{% static 'assets/css/theme-color/theme-default.css' %}" type="text/css">
 
+    <style>
+
+        @media (max-width: 768px) {
+            .sp-content {
+                top: 225px;
+              }  
+            .sp-container h2 {
+              margin-top: -69px;
+              font-size: 30px
+            }
+          }
+
+    </style>
 </head>
 
-<body id="home-version-1" class="home-version-1" data-style="default">
+<body id="home-version-1" class="home-version-1" data-style="default" style="background-color: #111111;">
 
-    <!--div class="loader loader-bar-ping-pong is-active"></div-->
-    <div id="site">
-    
 
-        <!--=========================-->
+	<div id="site">
+
+
+
+		<!--=========================-->
 		<!--=        Navbar         =-->
 		<!--=========================-->
-
+		
         {% include  'includes/header.html' %}
 
-        <!--=============================-->
+        {% include  'includes/offset.html' %}
+
+
+
+		<!--=============================-->
 		<!--=        Mobile Nav         =-->
 		<!--=============================-->
+		{% include  'includes/mobile-navbar.html' %}
 
-        {% include  'includes/mobile-navbar.html' %}
-
-        <!-- /#mobile-header -->
-
-        {% include  'includes/mobile-menu-inner.html' %}
-
-        <!-- /.mobile-menu-inner -->
-
-
-
-		<!--============================-->
-		<!--=        	Banner         =-->
-		<!--============================-->
+		{% include  'includes/mobile-menu-inner.html' %}
 
         {% block content %}
 
 
         {% endblock %}
 
-        <!--==============================-->
-		<!--=        	Footer         	 =-->
-		<!--==============================-->
 
-       
-		<!-- /#footer -->
+		<div class="backtotop">
+			<i class="fa fa-angle-up backtotop_btn"></i>
+		</div>
 
-    </div>
-    <!-- /#site -->
+        <script>
 
-    <!-- Dependency Scripts -->
-<script data-cfasync="false" src="https://themeim.com/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
-<script src="{% static 'dependencies/jquery/jquery.min.js' %}"></script>
-<script src="{% static 'dependencies/jquery-ui/jquery-ui.min.js' %}"></script>
-<script src="{% static 'dependencies/bootstrap/js/bootstrap.min.js' %}"></script>
-<script src="{% static 'dependencies/swiper/js/swiper.min.js' %}"></script>
-<script src="{% static 'dependencies/swiperRunner/swiperRunner.min.js' %}"></script>
-<script src="{% static 'dependencies/wow/js/wow.min.js' %}"></script>
-<script src="{% static 'dependencies/jquery.countdown/jquery.countdown.min.js' %}"></script>
-<script src="{% static 'dependencies/magnific-popup/js/jquery.magnific-popup.min.js' %}"></script>
-<script src="{% static 'dependencies/jquery.spinner/js/jquery.spinner.js' %}"></script>
-<script src="{% static 'dependencies/isotope-layout/isotope.pkgd.min.js' %}"></script>
-<script src="{% static 'dependencies/masonry-layout/masonry.pkgd.min.js' %}"></script>
-<script src="{% static 'dependencies/imagesloaded/imagesloaded.pkgd.min.js' %}"></script>
-<script src="{% static 'dependencies/slick-carousel/js/slick.min.js' %}"></script>
-<script src="{% static 'assets/js/headroom.js' %}"></script>
-<script src="{% static 'assets/js/soundmanager2.js' %}"></script>
-<script src="{% static 'assets/js/mp3-player-button.js' %}"></script>
-<script src="{% static 'assets/js/smoke.js' %}"></script>
-<script src="{% static 'dependencies/FitText.js/js/jquery.fittext.js' %}"></script>
-<script src="{% static 'dependencies/gmap3/js/gmap3.min.js' %}"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.16.1/TweenMax.min.js"></script>
-<script src="{% static ' dependencies/tilt.js/js/tilt.jquery.js' %}"></script>
-<script src="{% static 'assets/js/parallax.min.js' %}"></script>
-<!-- Player -->
-<script src="{% static 'dependencies/jPlayer/js/jquery.jplayer.min.js' %}"></script>
-<script src="{% static 'dependencies/jPlayer/js/jplayer.playlist.min.js' %}"></script>
-<script src="{% static 'assets/js/myplaylist.js' %}"></script>
-
-<!-- Remove It -->
-<script src="{% static 'dependencies/colornip/colornip.min.js' %}"></script>
-
-<!--Google map api -->
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBsBrMPsyNtpwKXPPpG54XwJXnyobfMAIc"></script>
-
-<!-- Site Scripts -->
-<script src="{% static 'assets/js/app.js' %}"></script>
+            var all_songs_js = [];
+        
+            const current_song_dj = {
+                title: "{{current_song.title}}",
+                artist: "{{current_song.artist}}",
+                m4a: "/media/{{current_song.audio_file}}",
+                poster: "/media/{{current_song.artwork}}"
+            };
+            all_songs_js.push(current_song_dj);
+            {% for song in similar_songs %}
+                var new_song_dj = {
+                    title: "{{song.title}}",
+                    artist: "{{song.artist}}",
+                    m4a: "/media/{{song.audio_file}}",
+                    poster: "/media/{{song.artwork}}"
+                };
+                all_songs_js.push(new_song_dj);
+            {% endfor %}
+        
+        </script>
+	</div>
+	<!-- /#site -->
+	<!-- Dependency Scripts -->
+    <script data-cfasync="false" src="https://themeim.com/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+    <script src="{% static 'dependencies/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'dependencies/jquery-ui/jquery-ui.min.js' %}"></script>
+    <script src="{% static 'dependencies/bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'dependencies/swiper/js/swiper.min.js' %}"></script>
+    <script src="{% static 'dependencies/swiperRunner/swiperRunner.min.js' %}"></script>
+    <script src="{% static 'dependencies/wow/js/wow.min.js' %}"></script>
+    <script src="{% static 'dependencies/jquery.countdown/jquery.countdown.min.js' %}"></script>
+    <script src="{% static 'dependencies/magnific-popup/js/jquery.magnific-popup.min.js' %}"></script>
+    <script src="{% static 'dependencies/jquery.spinner/js/jquery.spinner.js' %}"></script>
+    <script src="{% static 'dependencies/isotope-layout/isotope.pkgd.min.js' %}"></script>
+    <script src="{% static 'dependencies/masonry-layout/masonry.pkgd.min.js' %}"></script>
+    <script src="{% static 'dependencies/imagesloaded/imagesloaded.pkgd.min.js' %}"></script>
+    <script src="{% static 'dependencies/slick-carousel/js/slick.min.js' %}"></script>
+    <script src="{% static 'assets/js/headroom.js' %}"></script>
+    <script src="{% static 'assets/js/soundmanager2.js' %}"></script>
+    <script src="{% static 'assets/js/mp3-player-button.js' %}"></script>
+    <script src="{% static 'assets/js/smoke.js' %}"></script>
+    <script src="{% static 'dependencies/FitText.js/js/jquery.fittext.js' %}"></script>
+    <script src="{% static 'dependencies/gmap3/js/gmap3.min.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.16.1/TweenMax.min.js"></script>
+    <script src="{% static ' dependencies/tilt.js/js/tilt.jquery.js' %}"></script>
+    <script src="{% static 'assets/js/parallax.min.js' %}"></script>
+    <!-- Player -->
+    <script src="{% static 'dependencies/jPlayer/js/jquery.jplayer.min.js' %}"></script>
+    <script src="{% static 'dependencies/jPlayer/js/jplayer.playlist.min.js' %}"></script>
+    <script src="{% static 'assets/js/myplaylist.js' %}"></script>
+    
+    <!-- Site Scripts -->
+    <script src="{% static 'assets/js/app.js' %}"></script>
 
 
 </body>
 
 
-
 <!-- Mirrored from themeim.com/demo/milando/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 22 May 2023 16:23:48 GMT -->
-
 </html>

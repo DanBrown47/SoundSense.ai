@@ -7,24 +7,12 @@
     <div class="tim-container clearfix">
         <div class="row">
             <div class="section-title style-four">
-                <h2>ADD MORE SONGS</h2>
-                <p>There are many variations of passages of Lorem Ipsum available but the majority have suffered alteration in some injected humour.</p>
+                <h2>JOIN OUR COMMUNITY</h2>
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-4 col-md-10 col-sm-12 mx-auto">
-                <form method="post" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    <div class="form-group">
-                        <label>Select songs</label>
-                        {{ form.file }}
-                    </div>
-                    <button type="submit" class="btn btn-primary">Upload</button>
-                </form><br>
-                <a href="{% url 'update_csv' %}"><button type="button" class="btn btn-primary">Update Data</button></a><br>
-                <a href="{% url 'update_others' %}"><button type="button" class="btn btn-primary">Update Tags and Genre</button></a><br><br>
-                <a href="{% url 'retrain' %}"><button type="button" class="btn btn-danger">Retrain Model</button></a>
 
+            <div class="col-lg-4 col-md-10 col-sm-12 mx-auto">
 
                   <form method="post">
                     {% csrf_token %}
@@ -66,6 +54,10 @@
         </div>
     </div>
 </section>
+
+
+
+
 
 
 {% endblock %}

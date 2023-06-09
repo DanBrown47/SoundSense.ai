@@ -1,12 +1,12 @@
 import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.metrics.pairwise import cosine_similarity
-from essentia.standard import  MonoLoader, TensorflowPredict2D, TensorflowPredictEffnetDiscogs
+from essentia.standard import MonoLoader, TensorflowPredict2D, TensorflowPredictEffnetDiscogs
 from data.OpenL3_embeddings import EmbeddingsOpenL3
-from main.choices import genre_weightage, tags_weightage, instrument_weightage, feature_weights
+from main.choices import genre_weightage, tags_weightage, mdata_outliers, normalizing_factor, normalizing_factor_meta
 from pipeline_code import embedding_model_weights_dsg, embedding_model_weights_l3, all_columns_to_drop, rename_labels
 from unidecode import unidecode
-from main.choices import mdata_outliers, normalizing_factor, balancing_factor, normalizing_factor_meta
+from main import choices
 from sklearn.feature_extraction.text import TfidfVectorizer
 from .models import Song, Genre, Tag
 import numpy as np
@@ -15,7 +15,7 @@ import json
 import ast
 import regex as re
 
-def get_similar_songs_id(id):
+def get_similar_songs_id(request, id):
     df = pd.read_csv('data/songs_db.csv')
     df_features = pd.read_csv('data/song_dataset_final.csv')
     meta_df = pd.read_csv('data/metadata.csv')
@@ -33,6 +33,30 @@ def get_similar_songs_id(id):
 
     X['voice_male'] = (1 - X['voice_female']) * X['overall_voice']
     X['voice_female'] = X['voice_female'] * X['overall_voice']
+
+    instrument_weightage = choices.instrument_weightage
+    feature_weights = choices.feature_weights
+    balancing_factor = choices.balancing_factor
+
+    if request.user.is_authenticated:
+        pref = request.user.preference
+        if pref:
+            feature_weights['Engagement'] = pref.engagement
+            feature_weights['danceability'] = pref.danceability
+            feature_weights['mood_acoustic'] = pref.acoustics
+            feature_weights['mood_aggressive'] = pref.aggressive
+            feature_weights['mood_happy'] = pref.happy
+            feature_weights['mood_party'] = pref.party
+            feature_weights['mood_relaxed'] = pref.relaxed
+            feature_weights['mood_sad'] = pref.sad
+            feature_weights['tonal'] = pref.tonality
+            feature_weights['Reverb_wet'] = pref.reverb
+            feature_weights['voice_female'] = pref.gender
+            feature_weights['voice_male'] = pref.gender
+            feature_weights['overall_voice'] = pref.voice
+            feature_weights['year'] = pref.year
+            instrument_weightage = pref.instrument
+            balancing_factor = pref.metadata
 
     for key in feature_weights:
         X[key] = X[key] * feature_weights[key]
@@ -83,7 +107,7 @@ def get_similar_songs_id(id):
 path = "data/all_classifiers_and_metadata/"
 song_path = 'media/'
 
-def extract_all_features(all_songs, df_extract):
+def extract_all_features(all_songs, df_extract=None, single_file=None):
     column_labels = ['song name']
     rows = []
     flag = True
@@ -116,7 +140,7 @@ def extract_all_features(all_songs, df_extract):
             
             classification_models[key] = [model, model_type, classes]
             
-        scores = [df_extract[df_extract['file_path'] == song]['song name'].values[0]]
+        scores = [song] if single_file else [df_extract[df_extract['file_path'] == song]['song name'].values[0]]
 
         for key in classification_models:
             model = classification_models[key][0]
@@ -218,7 +242,6 @@ def update_csv_files_upon_model_deletion():
 
 def fill_genres_and_tags():
     songs = Song.objects.all()
-    #songs = songs[:6]
     
     df = pd.read_csv('data/song_dataset_final.csv')
     for song in songs:
@@ -264,3 +287,122 @@ def extract_metadata():
     df_meta.columns = ['song name', 'artist', 'album', 'track no', 'album artist', 'year']
     df_meta.sort_values('song name', inplace=True)
     df_meta.to_csv('data/metadata.csv', index=False)
+
+
+def upload_and_check_similarity(request, file_path = 'uploads/temp_neeraj.m4a'):
+    df = pd.read_csv('data/songs_db.csv')
+    df_features = pd.read_csv('data/song_dataset_final.csv')
+    meta_df = pd.read_csv('data/metadata.csv')
+    column_labels, rows = extract_all_features([file_path], single_file=file_path)
+    new_df = pd.DataFrame(rows, columns=column_labels)
+    new_df.drop(columns=all_columns_to_drop, inplace=True)
+    new_df.rename(columns=rename_labels, inplace=True)
+
+    genre_columns = [col for col in new_df.columns if col.startswith("Genre")]
+    tag_columns = [col for col in new_df.columns if col.startswith("Tag")]
+    instrument_columns = [col for col in new_df.columns if col.startswith("Instrument")]
+
+    genre_data = new_df[genre_columns].T
+    tag_data = new_df[tag_columns].T
+
+    top_genres, top_tags = [], []
+    for col in genre_data.columns:
+        temp1 = genre_data[col].nlargest(3).index.to_list()
+        temp2 = tag_data[col].nlargest(5).index.to_list()
+        top_genres.append(temp1)
+        top_tags.append(temp2)
+
+    new_df['top_genres'] = top_genres
+    new_df['top_tags'] = top_tags
+    updated_dataframe = pd.concat([df_features, new_df], ignore_index=True)
+
+    temp = []
+    audio_file = music_tag.load_file(song_path + file_path)
+    temp.append(file_path)
+    temp.append(str(audio_file['artist']))
+    temp.append(str(audio_file['album']))
+    temp.append(int(audio_file['tracknumber']))
+    temp.append(str(audio_file['albumartist']))
+    temp.append(int(audio_file['year']))
+
+    meta_df = pd.concat([meta_df, pd.DataFrame([temp], columns=meta_df.columns)], ignore_index=True)
+    df = pd.concat([df, pd.DataFrame([[df['ID'].max() + 500, file_path, None]], columns=df.columns)], ignore_index=True)
+    df['year'] = meta_df['year']
+    merged_df = pd.merge(df, updated_dataframe, on='song name', how='outer')
+
+    X = merged_df.iloc[:, 3:-2].copy()
+    X['year'] = X['year'].replace(0, np.nan).fillna(X['year'].median())
+    minmax = MinMaxScaler(feature_range=(0,1))
+    X.iloc[:,:14] = minmax.fit_transform(X.iloc[:,:14])
+
+    X['voice_male'] = (1 - X['voice_female']) * X['overall_voice']
+    X['voice_female'] = X['voice_female'] * X['overall_voice']
+
+    instrument_weightage = choices.instrument_weightage
+    feature_weights = choices.feature_weights
+    balancing_factor = choices.balancing_factor
+
+    if request.user.is_authenticated:
+        pref = request.user.preference
+        if pref:
+            feature_weights['Engagement'] = pref.engagement
+            feature_weights['danceability'] = pref.danceability
+            feature_weights['mood_acoustic'] = pref.acoustics
+            feature_weights['mood_aggressive'] = pref.aggressive
+            feature_weights['mood_happy'] = pref.happy
+            feature_weights['mood_party'] = pref.party
+            feature_weights['mood_relaxed'] = pref.relaxed
+            feature_weights['mood_sad'] = pref.sad
+            feature_weights['tonal'] = pref.tonality
+            feature_weights['Reverb_wet'] = pref.reverb
+            feature_weights['voice_female'] = pref.gender
+            feature_weights['voice_male'] = pref.gender
+            feature_weights['overall_voice'] = pref.voice
+            feature_weights['year'] = pref.year
+            instrument_weightage = pref.instrument
+            balancing_factor = pref.metadata
+
+    for key in feature_weights:
+        X[key] = X[key] * feature_weights[key]
+    for col in genre_columns:
+        X[col] = X[col] * genre_weightage
+    for col in instrument_columns:
+        X[col] = X[col] * instrument_weightage
+    for col in tag_columns:
+        X[col] = X[col] * tags_weightage
+
+    df_cosine = pd.DataFrame(cosine_similarity(X, dense_output=True))
+    df_cosine = df_cosine.applymap(lambda x: np.power(x, normalizing_factor))
+    indices = pd.Series(merged_df.index, index = merged_df['song name'])
+
+    def remove_punct(text):
+        return unidecode(re.sub(r'[^\w\s\,]', '', text.lower())) if str(text) != 'nan' else ''
+
+    def remove_outliers_and_extra_space(text):
+        for substring in mdata_outliers:
+            text = text.replace(substring, '')
+        clean_text = re.sub(r'\s+', ' ', text).strip()
+        return clean_text
+
+    artists = meta_df['artist'].apply(lambda x: remove_punct(x).split(', '))
+    albums = meta_df['album'].apply(lambda x: remove_punct(x).split(', '))
+    album_artist = meta_df['album artist'].apply(lambda x: remove_punct(x).split(', '))
+
+    meta_df['artists_album'] = artists + album_artist + albums
+    meta_df['artists_album'] = meta_df['artists_album'].apply(lambda x: [remove_outliers_and_extra_space(i) for i in x])
+    meta_df['artists_album'] = meta_df['artists_album'].apply(lambda x: list(set(x)))
+    meta_df['artists_album_final'] = meta_df['artists_album'].apply(lambda x: " ".join([text.replace(" ", "_") for text in x]))
+
+    tfidf = TfidfVectorizer(stop_words = "english")
+    tfidf_matrix = tfidf.fit_transform(meta_df['artists_album_final'])
+
+    df_cosine_meta = pd.DataFrame(cosine_similarity(tfidf_matrix, tfidf_matrix))
+    df_cosine_meta = df_cosine_meta.applymap(lambda x: np.power(x, normalizing_factor_meta) * balancing_factor)
+    resultant_cosine = df_cosine.add(df_cosine_meta)
+
+    index = indices[file_path]
+    similarity_scores = list(enumerate(resultant_cosine[index]))
+    similarity_scores = sorted(similarity_scores, key = lambda x: x[1],reverse = True)
+    similarity_scores = similarity_scores[1:16]
+    res_indices = [i[0] for i in similarity_scores]
+    return merged_df['ID'].iloc[res_indices[:]].to_list()
