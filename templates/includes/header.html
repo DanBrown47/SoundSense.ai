@@ -12,7 +12,7 @@
 
                 <div class="nav">
                     <ul class="group" id="header-menu-magic-line">
-                        <li class="menu-item {% active_link 'home' 'current_page_item' strict=False %}">
+                        <li class="menu-item {% active_link 'home' 'current_page_item' strict=True %}">
                             <a href="{% url 'home' %}">Home </a>
                         </li>
                         <li class="menu-item {% if request.resolver_match.view_name == 'all_songs' or request.resolver_match.view_name == 'song' %}current_page_item{% endif %}">
