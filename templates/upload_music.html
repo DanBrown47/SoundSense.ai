@@ -13,54 +13,35 @@
         </div>
         <div class="row">
             <div class="col-lg-4 col-md-10 col-sm-12 mx-auto">
-                <form method="post" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    <div class="form-group">
-                        <label>Select songs</label>
-                        {{ form.file }}
-                    </div>
-                    <button type="submit" class="btn btn-primary">Upload</button>
-                </form><br>
-                <a href="{% url 'update_csv' %}"><button type="button" class="btn btn-primary">Update Data</button></a><br>
-                <a href="{% url 'update_others' %}"><button type="button" class="btn btn-primary">Update Tags and Genre</button></a><br><br>
-                <a href="{% url 'retrain' %}"><button type="button" class="btn btn-danger">Retrain Model</button></a>
+                <div class="container">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label>Select songs</label>
+                            {{ form.file }}
+                        </div>
+                        <div class="row">
+                            <div class="col text-center">
+                              <button type="submit" class="btn btn-primary btn-lg">Upload</button>
+                            </div>
+                          </div>
+                    </form>
+                </div>
 
-
-                  <form method="post">
-                    {% csrf_token %}
-                    
-                    <div class="form-group">
-                      <label for="id_username">Username:</label>
-                      <input type="text" class="form-control" name="username" maxlength="150" autofocus="" required="" id="id_username">
-                      <small class="form-text text-muted">{{ form.username.help_text }}</small>
+                <div class="container my-lg-3">
+                    <div class="row">
+                      <div class="col">
+                        <a href="{% url 'update_csv' %}"><button class="btn btn-primary btn-block">Update Data</button></a>
+                      </div>
+                      <div class="col">
+                        <a href="{% url 'update_others' %}"><button class="btn btn-primary btn-block">Update Tags and Genre</button></a>
+                      </div>
+                      <div class="col">
+                        <a href="{% url 'retrain' %}"><button class="btn btn-danger btn-block">Retrain Model</button></a>
+                      </div>
                     </div>
-                    
-                    <div class="form-group">
-                      <label for="id_email">Email:</label>
-                      <input type="email" class="form-control" name="email" required="" id="id_email">
-                    </div>
-                    
-                    <div class="form-group">
-                      <label for="id_password1">Password:</label>
-                      <input type="password" class="form-control" name="password1" autocomplete="new-password" required="" id="id_password1">
-                      <small class="form-text text-muted">{{ form.password1.help_text }}</small>
-                    </div>
-
-                    <div class="form-group">
-                      <label for="id_password2">Confirm Password:</label>
-                      <input type="password" class="form-control" name="password2" autocomplete="new-password" required="" id="id_password2">
-                      <small class="form-text text-muted">{{ form.password2.help_text }}</small>
-                    </div>
-                    {% if form.password1.errors %}
-                    <ul class="text-danger">
-                        {% for error in form.password1.errors %}
-                        <li>{{ error }}</li>
-                        {% endfor %}
-                    </ul>
-                    {% endif %}
-                    <button type="submit" class="btn btn-primary">Register</button>
-                  </form>
-
+                  </div>
+                  
             </div>
 
         </div>
