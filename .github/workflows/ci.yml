@@ -9,7 +9,7 @@ on:
       - main
 
 env:
-  DOCKER_USERNAME: ${{ github.actor }}
+  DOCKER_USERNAME: danbrown47
   DOCKER_IMAGE_NAME: soundsense
 
 jobs:
