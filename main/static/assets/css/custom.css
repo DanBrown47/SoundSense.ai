@@ -1,0 +1,151 @@
+.snk-album-art img {
+  float: left;
+  max-width: 450px;
+  margin-top: 17%;
+  margin-left: 2%;
+  -webkit-transform: translateY(-100px);
+  -ms-transform: translateY(-100px);
+  transform: translateY(-100px);
+}
+.snk-title {
+  color: #fff;
+  font-size: 72px;
+  color: transparent;
+  font-family: "intro_inlineregular";
+  text-shadow: 0px 0px 1px #110006;
+  text-overflow: ellipsis;
+}
+.snk-artist {
+  color: #fff;
+  font-size: 24px;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 3px;
+  font-family: "Roboto", sans-serif;
+  padding-top: 5px;
+  width: 100%;
+  margin: 0;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.snk-content {
+  margin: 3% 3% 0 44%;
+  position: relative;
+}
+.song-details {
+  font-family: "Changa", sans-serif;
+  color: #e9e5e5;
+  font-size: 17px;
+  -webkit-font-smoothing: antialiased;
+}
+.errorlist li {
+  color: #e30000e8;
+}
+.homelogo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.homelogo h3 {
+  color: #fff;
+  font-size: 30px;
+  color: transparent;
+  font-family: "intro_inlineregular";
+  text-shadow: 0px 0px 1px #110006;
+  text-overflow: ellipsis;
+  letter-spacing: 4px;
+  padding-top: 36px;
+  line-height: 1.6;
+  width: 90%;
+}
+
+@media (max-width: 1280px) {
+  .snk-album-art img {
+    max-width: 430px;
+  }
+  .snk-content {
+    margin: 7% -48.5% 0% 12.5%;
+  }
+  .snk-title {
+    font-size: 60px;
+  }
+  .snk-artist {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 992px) {
+  .homelogo {
+    padding-top: 10%;
+  }
+  .homelogo h3 {
+    font-size: 22px;
+    letter-spacing: 3px;
+  }
+  .snk-album-art img {
+    max-width: 420px;
+    -webkit-transform: translateY(-10px);
+    -ms-transform: translateY(-10px);
+    transform: translateY(-10px);
+  }
+  .snk-content {
+    margin: 7% -48.5% 0% 12.5%;
+  }
+  .snk-title {
+    font-size: 34px;
+  }
+  .snk-artist {
+    font-size: 15px;
+  }
+}
+@media (max-width: 768px) {
+  .homelogo {
+    padding-top: 15%;
+  }
+  .homelogo h3 {
+    font-size: 18px;
+    letter-spacing: 3px;
+  }
+  .snk-album-art img {
+    float: none;
+    display: block;
+    margin: 25% auto;
+    max-width: 290px;
+  }
+  .snk-content {
+    margin: 80% -0.5% 0% 9.5%;
+  }
+  .snk-title {
+    font-size: 28px;
+  }
+  .snk-artist {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 500px) {
+  .homelogo {
+    padding-top: 20%;
+  }
+  .homelogo h3 {
+    font-size: 14px;
+    letter-spacing: 2px;
+  }
+  .snk-album-art img {
+    float: none;
+    display: block;
+    margin: 30% auto;
+    max-width: 290px;
+  }
+  .snk-content {
+    margin: 93% 6.5% 0px 6.5%;
+  }
+  .snk-title {
+    font-size: 24px;
+  }
+  .snk-artist {
+    font-size: 11px;
+  }
+}

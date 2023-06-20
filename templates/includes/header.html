@@ -5,8 +5,8 @@
         <div class="tim-container clearfix">
             <div class="header-magic-line-inner clearfix">
                 <div id="site-logo" class="float-left">
-                    <a href="{% url 'home' %}" class="logo-main"><img src="{% static 'assets/img/logo.png' %}" style="width:320px" alt="logo"></a>
-                    <a href="{% url 'home' %}" class="logo-stickky"><img src="{% static 'assets/img/logo.png' %}" style="width:320px" alt="logo"></a>
+                    <a href="{% url 'home' %}" class="logo-main"><img src="/media/icons/logo.png" style="width:320px" alt="logo"></a>
+                    <a href="{% url 'home' %}" class="logo-stickky"><img src="/media/icons/logo.png" style="width:320px" alt="logo"></a>
                 </div>
 
 
@@ -18,7 +18,7 @@
                         <li class="menu-item {% if request.resolver_match.view_name == 'all_songs' or request.resolver_match.view_name == 'song' %}current_page_item{% endif %}">
                             <a href="{% url 'all_songs' %}">Songs</a>
                         </li>
-                        <li class="menu-item {% active_link 'search' 'current_page_item' strict=True %}">
+                        <li class="menu-item {% active_link 'search||search_individual' 'current_page_item' strict=True %}">
                             <a href="{% url 'search' %}">Find</a>
                         </li>
                         {% if request.user.is_authenticated%}
@@ -37,6 +37,11 @@
                         </li>
                         <li class="menu-item {% active_link 'admin' 'current_page_item' strict=True %}">
                             <a href="{% url 'admin:index' %}">Admin</a>
+                        </li>
+                        {% endif %}
+                        {% if request.user.is_authenticated %}
+                        <li class="menu-item ">
+                            <a href="{% url 'logout' %}">Logout</a>
                         </li>
                         {% endif %}
                     </ul>

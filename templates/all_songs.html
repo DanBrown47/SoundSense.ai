@@ -4,14 +4,14 @@
 {% block content %}
 
 <section class="section-padding">
-    <div class="tim-container clearfix">
+    <div class="tim-container clearfix" style="text-align: center">
         <div class="row">
             <div class="section-title style-four">
-                <h2>LISTEN TO THE MUSIC YOU LIKE</h2>
-                <p>There are many variations of passages of Lorem Ipsum available but the majority have suffered alteration in some injected humour.</p>
+                <h2>Explore Harmonious Connections</h2>
+                <p>Discover the richness of our extensive database, featuring a handpicked selection of over {{song_count}} meticulously curated songs, all masterfully crafted in impeccable high quality.</p>
             </div>
         </div>
-        <div class="row">
+        <div class="row" style="text-align: left">
 
             {% for song in page_obj %}
             <div class="col-lg-3 col-md-4 col-6 col-full-width" style="padding-right: 10px;padding-left: 10px;padding-bottom: 10px;padding-top: 10px;">
@@ -31,7 +31,7 @@
 
         
         </div>
-        <div style="pagination center">
+        <div style="pagination center;display: inline-block;">
             <div id="store-pagination" class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets center" style="margin: 0 auto">
                 {% if page_obj.has_previous %}
                     <a href="?page={{ page_obj.previous_page_number }}"><span class="swiper-pagination-bullet"></span></a>

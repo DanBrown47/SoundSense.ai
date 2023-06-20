@@ -8,9 +8,10 @@ from django.contrib.auth import logout
 from django.contrib.auth import authenticate, login
 from django.contrib.admin.views.decorators import staff_member_required
 from . models import Song
-from .forms import SongForm, UserRegistrationForm, UserPreferenceForm, SongUploadForm, LoginForm
-from .utils import get_similar_songs_id, train_model, update_songs_in_database_to_csv, update_csv_files_upon_model_deletion, fill_genres_and_tags, extract_metadata, upload_and_check_similarity
+from . forms import SongForm, UserRegistrationForm, UserPreferenceForm, SongUploadForm, LoginForm
+from . utils import get_similar_songs_id, train_model, update_songs_in_database_to_csv, update_csv_files_upon_model_deletion, fill_genres_and_tags, extract_metadata, upload_and_check_similarity
 import os
+import math
 
 class ReplaceExistingStorage(FileSystemStorage):
     def get_available_name(self, name, max_length=None):
@@ -25,9 +26,10 @@ def home(request):
 def All_songs(request):
     all_songs = Song.objects.all().order_by('title')
     paginator = Paginator(all_songs, 48)  # Show 10 products per page
+    hundred_ceil_song_count = math.floor(all_songs.count() / 100) * 100
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    return render(request, 'all_songs.html', {'page_obj': page_obj})
+    return render(request, 'all_songs.html', {'page_obj': page_obj, 'song_count':hundred_ceil_song_count})
 
 def Search_song(request):
     title = request.GET['title'] if ('title' in request.GET) else None
@@ -59,9 +61,6 @@ def song(request, song_id):
     }
     return render(request, 'song.html', context)
 
-def is_superuser(user):
-    return user.is_superuser
-
 @staff_member_required(login_url='login')
 def upload_music(request):
     if request.method == "POST":
@@ -84,12 +83,14 @@ def Register(request):
         if form.is_valid():
             form.save()
             messages.success(request, "Registered successfully")
-            return redirect('home')
+            return redirect('login')
     else:
         form = UserRegistrationForm()
     return render(request, 'register.html', {'form': form})
 
 def Login(request):
+    if request.user.is_authenticated:
+        return redirect('dashboard')
     if request.method == 'POST':
         form = LoginForm(request, data=request.POST)
         if form.is_valid():
@@ -166,4 +167,3 @@ def retrain_model(request):
 def update_genre_tags_processed(request):
     fill_genres_and_tags()
     return redirect(request.META['HTTP_REFERER'])
-

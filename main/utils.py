@@ -174,7 +174,7 @@ def train_model():
     audio_file_list = df_to_extract['file_path']
 
     if len(audio_file_list) == 0:
-        print("terminating")
+        print("no new songs to retrain. Terminating")
         return
     column_labels, rows = extract_all_features(audio_file_list, df_to_extract)
     new_df = pd.DataFrame(rows, columns=column_labels)

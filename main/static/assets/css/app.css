@@ -138,7 +138,7 @@ img {
 
 @media (max-width: 1599px) {
   .tim-container {
-    padding: 6% 5%;
+    padding: 0% 5%;
   }
 }
 
@@ -3042,12 +3042,10 @@ nav#accordian {
 
 .header_player.style-fullwidth {
   position: relative;
-  height: 80px;
   background: transparent;
   background: #111111;
-  height: 100px;
   padding: 7px 0 0;
-  height: 92px;
+  height: 55px;
 }
 
 .header_player.style-fullwidth #main_player {
@@ -3082,7 +3080,7 @@ nav#accordian {
 }
 
 .header_player.style-fullwidth .jp-audio .jp-type-playlist .jp-interface .jp-progress {
-  max-width: 54%;
+  max-width: 55%;
   height: 6px;
 }
 
@@ -3093,7 +3091,7 @@ nav#accordian {
 }
 
 .header_player.style-fullwidth .current-tracks {
-  width: 425px;
+  width: 440px;
 }
 
 .header_player.style-fullwidth .jp-audio .jp-type-playlist {
@@ -3120,6 +3118,7 @@ nav#accordian {
 .header_player.style-fullwidth button#playlist-toggle {
   float: right;
   margin-right: 25px;
+  display: none;
 }
 
 .header_player.style-fullwidth .jp-audio #playlist-toggle i {
@@ -3135,7 +3134,7 @@ nav#accordian {
 
 .header_player.style-fullwidth .jp-audio .jp-type-playlist .jp-interface .jp-controls .jp-play i {
   font-size: 29px;
-  line-height: 80px;
+  line-height: 77px;
   color: #f60038;
   margin-left: 6px;
 }
@@ -3147,7 +3146,7 @@ nav#accordian {
 
 .header_player.style-fullwidth .jp-audio .jp-type-playlist .jp-interface .jp-duration {
   font-family: "Roboto", sans-serif;
-  color: #424242;
+  color: #6c757d;
   color-font-size: 14px;
 }
 
@@ -3180,8 +3179,8 @@ nav#accordian {
 
 .banner-five .baneer-five-content {
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: 26%;
+  left: 42%;
   text-align: center;
   -webkit-transform: translate(-50%, -25%);
   -ms-transform: translate(-50%, -25%);
@@ -3190,7 +3189,7 @@ nav#accordian {
   z-index: 99;
 }
 
-.banner-five .baneer-five-content h3 {
+/*.banner-five .baneer-five-content h3 {
   color: #fff;
   font-size: 30px;
   text-transform: uppercase;
@@ -3199,7 +3198,7 @@ nav#accordian {
   margin-top: 126px;
   font-family: "Roboto", sans-serif;
   position: relative;
-}
+}*/
 
 .banner-five .baneer-five-content .tim-slide-btn {
   border: 2px dashed #ff6c00;
@@ -3484,9 +3483,9 @@ nav#accordian {
   position: absolute;
   content: '';
   left: 50%;
-  top: 5px;
+  top: 9px;
   height: 1px;
-  width: 36%;
+  width: 26%;
   background: white;
   background: -webkit-gradient(linear, left top, right top, from(rgba(255, 255, 255, 0)), color-stop(14%, #f60038), color-stop(85%, #f60038), to(rgba(255, 255, 255, 0)));
   background: -o-linear-gradient(left, rgba(255, 255, 255, 0) 0%, #f60038 14%, #f60038 85%, rgba(255, 255, 255, 0) 100%);
@@ -3502,7 +3501,7 @@ nav#accordian {
   left: 50%;
   bottom: 5px;
   height: 1px;
-  width: 36%;
+  width: 26%;
   background: white;
   background: -webkit-gradient(linear, left top, right top, from(rgba(255, 255, 255, 0)), color-stop(14%, #f60038), color-stop(85%, #f60038), to(rgba(255, 255, 255, 0)));
   background: -o-linear-gradient(left, rgba(255, 255, 255, 0) 0%, #f60038 14%, #f60038 85%, rgba(255, 255, 255, 0) 100%);
@@ -3883,7 +3882,7 @@ nav#accordian {
     width: 200px;
   }
   .header_player.style-fullwidth .jp-audio .jp-type-playlist .jp-interface .jp-progress {
-    max-width: 45%;
+    max-width: 55%;
   }
 }
 
@@ -3892,7 +3891,7 @@ nav#accordian {
     width: 200px;
   }
   .header_player.style-fullwidth .jp-audio .jp-type-playlist .jp-interface .jp-progress {
-    max-width: 45%;
+    max-width: 55%;
   }
 }
 
@@ -3968,7 +3967,7 @@ nav#accordian {
             transform: rotate(35deg) scale(1.5);
   }
   .banner-five {
-    height: 760px;
+    height: 660px;
   }
   .paralax {
     top: 22%;
@@ -3996,15 +3995,18 @@ nav#accordian {
             transform: rotate(35deg) scale(1.5);
   }
   .banner-five {
-    height: 660px;
+    height: 548px;
   }
-  .banner-five .baneer-five-content h3 {
+  /*.banner-five .baneer-five-content h3 {
     font-size: 9px;
     margin-top: 0px;
-  }
+  }*/
   .banner-five .baneer-five-content h3::before,
   .banner-five .baneer-five-content h3::after {
     display: none;
+  }
+  .banner-five .baneer-five-content{
+    left: 50%;
   }
   .banner-five .baneer-five-content .tim-slide-btn {
     padding: 7px 17px;
@@ -4018,9 +4020,7 @@ nav#accordian {
     background-size: contain;
     background-repeat: no-repeat;
   }
-  .banner-five {
-    height: 460px;
-  }
+
   .sp-container {
     top: -28px;
   }
@@ -4032,41 +4032,63 @@ nav#accordian {
     -webkit-transform: rotate(0deg) scale(1.5);
         -ms-transform: rotate(0deg) scale(1.5);
             transform: rotate(0deg) scale(1.5);
-    height: 400px;
+    /*height: 400px;*/
     top: 0;
     left: 0;
   }
+  .header_player.style-fullwidth {
+    height: 12px;
+    padding-bottom: 10px;
+  }
+  .header_player.style-fullwidth .player-container-fullwidth {
+    margin: 0 1.5%;
+  }
+  .header_player.style-fullwidth .jp-audio .jp-type-playlist {
+    height: 60px;
+  }
   .header_player.style-fullwidth .jp-audio .jp-type-playlist .jp-interface .jp-controls .jp-play {
-    height: 75px;
+    height: 60px;
     width: 60px;
   }
   .header_player.style-fullwidth .jp-audio .jp-type-playlist .jp-interface .jp-controls {
     width: 60px;
+    height: 60px;
   }
   .header_player.style-fullwidth .jp-audio .jp-type-playlist .vel-wrap {
-    display: none;
+    /*display: none;*/
   }
   .header_player.style-fullwidth .jp-audio .jp-type-playlist .jp-interface .jp-progress {
+    max-width: 75%;
     width: 100%;
   }
   .header_player.style-fullwidth .jp-audio .jp-type-playlist .jp-interface {
-    padding: 26px 0 13px 80px;
+    padding: 18px 0 13px 80px;
   }
   .header_player.style-fullwidth .jp-audio .jp-type-playlist .jp-interface .jp-duration {
-    display: none;
+    /*display: none;*/
+    display: block;
   }
   .header_player.style-fullwidth .jp-audio .jp-type-playlist .jp-interface .jp-controls .jp-play i {
     font-size: 22px;
+    line-height: 63px;
   }
 }
 
 @media (min-width: 400px) and (max-width: 575px) {
+  .header_player.style-fullwidth {
+    height: 12px;
+    padding-bottom: 10px;
+  }
+  .header_player.style-fullwidth .player-container-fullwidth {
+    margin: 0 1.5%;
+  }
   .header_player.style-fullwidth .jp-audio .jp-type-playlist .jp-interface .jp-progress {
-    width: 40%;
+    width: 75%;
   }
   .header_player.style-fullwidth .jp-audio .jp-type-playlist .jp-interface .vel-wrap {
     width: 80px;
-    display: block;
+    /*display: block;*/
+    display: none;
   }
 }
 
@@ -4476,6 +4498,7 @@ nav#accordian {
   height: 5px;
   background: #fff;
   margin-bottom: 4px;
+  margin-left: 3px;
   cursor: pointer;
 }
 
@@ -4909,7 +4932,7 @@ nav#accordian {
     font-size: 15px;
   }
   .header_player .jp-audio .jp-type-playlist .vel-wrap {
-    display: none;
+    /*display: none;*/
   }
   .banner-slider-two .swiper-slide .slider-content-two {
     width: 100%;
@@ -5843,7 +5866,7 @@ nav#accordian {
 
 @media (max-width: 768px) {
   .section-padding {
-    padding: 50px 0;
+    padding: 84px 0;
   }
   .concerts {
     display: block !important;
@@ -12189,7 +12212,7 @@ div.jp-seeking-bg {
     margin-top: 132px;
   }
   .header_player.tab_page .jp-audio .jp-type-playlist .jp-interface .vel-wrap {
-    display: none;
+    /*display: none;*/
   }
 }
 
@@ -22179,10 +22202,10 @@ ul.products li.product-two .ajax_add_to_cart i {
   .empty-space {
     display: none;
   }
-  .banner-five .baneer-five-content h3 {
+  /*.banner-five .baneer-five-content h3 {
     font-size: 22px;
     margin-top: 53px;
-  }
+  }*/
   .banner-five .baneer-five-content .tim-slide-btn {
     margin-top: 20px;
     padding: 12px 35px;
@@ -22857,7 +22880,8 @@ ul.products li.product-two .ajax_add_to_cart i {
 #store-pagination {
   text-align: left;
   /*left: 35px;*/
-  bottom: 40px;
+  top: 50px;
+  position: relative;
 }
 
 #store-pagination .swiper-pagination-bullet {

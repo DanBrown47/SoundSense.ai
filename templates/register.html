@@ -11,9 +11,23 @@
             </div>
         </div>
         <div class="row">
-
             <div class="col-lg-4 col-md-10 col-sm-12 mx-auto">
 
+              <a href="{% url 'login'%}"><button type="button" class="btn btn-info">Back to Login</button></a>
+              <div style="margin: 20px;"></div>
+
+                    {% if form.errors %}
+                    <div class="alert alert-danger">
+                      <strong>Error:</strong>
+                      <ul>
+                        {% for field_errors in form.errors.values %}
+                          {% for error in field_errors %}
+                            <li>{{ error }}</li>
+                          {% endfor %}
+                        {% endfor %}
+                      </ul>
+                    </div>
+                  {% endif %}
                   <form method="post">
                     {% csrf_token %}
                     
@@ -39,14 +53,7 @@
                       <input type="password" class="form-control" name="password2" autocomplete="new-password" required="" id="id_password2">
                       <small class="form-text text-muted">{{ form.password2.help_text }}</small>
                     </div>
-                    {% if form.password1.errors %}
-                    <ul class="text-danger">
-                        {% for error in form.password1.errors %}
-                        <li>{{ error }}</li>
-                        {% endfor %}
-                    </ul>
-                    {% endif %}
-                    <button type="submit" class="btn btn-primary">Register</button>
+                    <button type="submit" class="btn btn-block btn-primary">Register</button>
                   </form>
 
             </div>

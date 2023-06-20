@@ -11,9 +11,9 @@
 	<title>Home — Milando - Music Portal HTML Templat</title>
 
     <!-- Fav Icon -->
-    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'assets/img/fav-icons/apple-touch-icon.png' %}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'assets/img/fav-icons/favicon-32x32.png' %}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'assets/img/fav-icons/favicon-16x16.png' %}">
+    <link rel="apple-touch-icon" sizes="180x180" href="/media/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/media/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/media/icons/favicon-16x16.png">
     <meta name="theme-color" content="#e43a90">
 
     <!-- Dependency Styles -->
@@ -31,24 +31,11 @@
     <!-- Site Stylesheet -->
     <link rel="stylesheet" href="{% static 'assets/css/woocommerce.css' %}" type="text/css">
     <link rel="stylesheet" href="{% static 'assets/css/app.css' %}" type="text/css">
-
-    <style>
-
-        @media (max-width: 768px) {
-            .sp-content {
-                top: 225px;
-              }  
-            .sp-container h2 {
-              margin-top: -69px;
-              font-size: 30px
-            }
-          }
-
-    </style>
+    <link rel="stylesheet" href="{% static 'assets/css/custom.css' %}" type="text/css">
 </head>
 
 <body id="home-version-1" class="home-version-1" data-style="default" style="background-color: #111111;">
-
+    
 	<div id="site">
 
 		<!--=========================-->
@@ -79,8 +66,11 @@
                 m4a: "/media/{{current_song.audio_file}}",
                 poster: "/media/{{current_song.artwork}}"
             };
-        
+            
+            all_songs_js.push(current_song_dj);
+                 
         </script>
+        
 	</div>
 	<!-- /#site -->
 	<!-- Dependency Scripts -->
@@ -103,10 +93,10 @@
     <script src="{% static 'assets/js/mp3-player-button.js' %}"></script>
     <script src="{% static 'assets/js/smoke.js' %}"></script>
     <script src="{% static 'dependencies/FitText.js/js/jquery.fittext.js' %}"></script>
-    <script src="{% static 'dependencies/gmap3/js/gmap3.min.js' %}"></script>
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.16.1/TweenMax.min.js"></script>
-    <script src="{% static ' dependencies/tilt.js/js/tilt.jquery.js' %}"></script>
-    <script src="{% static 'assets/js/parallax.min.js' %}"></script>
+    <script src="{% static 'dependencies/tilt.js/js/tilt.jquery.js' %}"></script>
+   
     <!-- Player -->
     <script src="{% static 'dependencies/jPlayer/js/jquery.jplayer.min.js' %}"></script>
     <script src="{% static 'dependencies/jPlayer/js/jplayer.playlist.min.js' %}"></script>

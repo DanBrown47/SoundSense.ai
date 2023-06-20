@@ -5,7 +5,7 @@
         <div class="mob-header-inner clearfix">
             <div class="d-flex justify-content-start mobile-logo">
                 <a href="{% url 'home' %}">
-            <img src="{% static 'assets/img/logo.png' %}" alt="Site Logo">
+            <img src="/media/icons/logo.png" alt="Site Logo">
         </a>
             </div>
 
@@ -35,8 +35,10 @@
             {% endif %}
             {% if request.user.is_authenticated and request.user.is_staff %}
             <li><a href="{% url 'upload' %}">Add Songs</a></li>
-            {% else %}
             <li><a href="{% url 'admin:index' %}">Admin</a></li>
+            {% endif %}
+            {% if request.user.is_authenticated %}
+            <li><a href="{% url 'logout' %}">Logout</a></li>
             {% endif %}
         </ul>
     </nav>

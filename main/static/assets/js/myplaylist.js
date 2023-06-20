@@ -14,7 +14,7 @@ jQuery(document).ready(function($) {
         // autoPlay: true,
       },
       swfPath: "dependencies/jPlayer/js",
-      supplied: "oga, mp3, m4a",
+      supplied: "oga, mp3, m4a, wav",
       wmode: "window",
       useStateClassSkin: true,
       toggleDuration: true,
@@ -115,7 +115,7 @@ jQuery(document).ready(function($) {
     }
   ], {
     swfPath: "../../dist/jplayer",
-    supplied: "oga, mp3, m4a",
+    supplied: "oga, mp3, m4a, wav",
     wmode: "window",
     useStateClassSkin: true,
     autoBlur: false,

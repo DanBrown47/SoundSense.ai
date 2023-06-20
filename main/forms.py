@@ -59,7 +59,20 @@ class UserPreferenceForm(forms.ModelForm):
             'voice': forms.NumberInput(attrs={'type': 'range', 'min': 0, 'max': 1, 'step': 0.01, 'class':"form-control-range"}),
             'year': forms.NumberInput(attrs={'type': 'range', 'min': 0, 'max': 1, 'step': 0.01, 'class':"form-control-range"})
         }
-
+        labels = {
+            'metadata': 'Artists and Album',
+            'engagement': 'Level of Engagement',
+            'aggressive': 'Aggressiveness',
+            'instrument': 'Instruments used',
+            'happy': 'Happiness',
+            'party': 'Party Mood',
+            'relaxed': 'Relaxation',
+            'sad': 'Sadness',
+            'reverb': 'Reverberation',
+            'gender': 'Singer gender',
+            'voice': 'Overall vocals percentage',
+            'year': 'Time of Release'
+        }
 
 class SongUploadForm(forms.Form):
     file = forms.FileField(required=False, label='Select a file', widget=forms.ClearableFileInput(attrs={'class': 'form-control-file', 'accept':'.m4a, .mp3, .wav'}))

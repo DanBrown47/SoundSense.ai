@@ -508,12 +508,12 @@ var THEMEIM = THEMEIM || {};
       });
 
 
-      $('.banner-five').each(function() {
+      //$('.banner-five').each(function() {
 
-        var scene = document.getElementById('paralax-1');
-        var parallax = new Parallax(scene);
+      //  var scene = document.getElementById('paralax-1');
+      //  var parallax = new Parallax(scene);
 
-      });
+      //});
 
 
 
@@ -674,11 +674,15 @@ var THEMEIM = THEMEIM || {};
       var accordion = new Accordion($('.accordion-menu'), false);
 
       $('.toggle-inner').on('click', function(e) {
+        console.log("Pass 1")
         e.preventDefault();
+        console.log("Pass 2")
         var mask = '<div class="mask-overlay">';
 
         $('body').toggleClass('active');
+        console.log("Pass 3")
         $(mask).hide().appendTo('body').fadeIn('fast');
+        console.log("Pass 4")
         $('.mask-overlay, .close-menu').on('click', function() {
           $('body').removeClass('active');
           $('.mask-overlay').remove();

@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load custom_filters %}
 
 {% block content %}
 
@@ -8,22 +9,13 @@
 <!--============================-->
 <section class="banner-five" style="background-image: url('/media/background/bg5.jpg');">
     <div class="tim-container">
-        <div class="content" style="display: flex;align-items: center;height: 100vh;padding-left: 50px;">
-            <img src="/media/{{current_song.artwork}}" alt="" style="max-width: 450px">
+        <div class="content snk-album-art">
+            <img src="/media/{{current_song.artwork}}" alt="">
         </div>
         <div class="baneer-five-content">
-            <div class="content sp-container">
-                <div class="sp-content">
-                    <div class="sp-globe"></div>
-
-                    <div class="col-md-8 content text-center" >
-                        <h2>{{current_song.title}}</h2>
-                        <h3>{{current_song.artist}}</h3>
-                    
-                    </div>
-
-                </div>
-
+            <div class="content snk-content text-center">
+               <h2 class="snk-title">{{current_song.title}}</h2>
+               <h3 class="snk-artist">{{current_song.artist}}</h3>
             </div>
         </div>
         <!-- /.tim-container -->
@@ -110,22 +102,46 @@
                             <h6>Description</h6>
                         </div>
         
-                        <ul>
-        
-                            {% if current_song.title %}<li>Title <span>{{current_song.title}}</span></li>{% endif %}
-                            {% if current_song.artist %}<li>Artist <span>{{current_song.artist}}</span></li>{% endif %}
-                            {% if current_song.album %}<li>Album <span>{{current_song.album}}</span></li>{% endif %}
-                            {% if current_song.album_artist %}<li>Album artist <span>{{current_song.album_artist}}</span></li>{% endif %}
-                            {% if current_song.track_number %}<li>Track number <span>{{current_song.track_number}}</span></li>{% endif %}
-                            {% if current_song.released %}<li>Release year <span>{{current_song.released|date:"Y"}}</span></li>{% endif %}
-        
-                            {% if current_song.genre_set.count > 0 %}<li>Genre <span>{{current_song.genre_set.first.get_name_display}}</span></li>{% endif %}
-                            {% if current_song.duration %}<li>Duration <span>{{current_song.duration}}</span></li>{% endif %}
-        
-                            {% if current_song.tag_set.count > 0 %}<li>Tags <span>{% for tag in current_song.tag_set.all %}{{tag.get_name_display}}{% if not forloop.last %}, {% endif %}{% endfor %}</span></li>{% endif %}
-        
-                        </ul>
-        
+                        <table class="table align-middle table-borderless song-details">
+                            <tbody>
+                                {% if current_song.title %}
+                                    <tr><td>Title</td>
+                                    <td>{{current_song.title}}</td></tr>
+                                {% endif %}
+                                {% if current_song.artist %}
+                                    <tr><td>Artist</td>
+                                    <td>{{current_song.artist}}</td></tr>
+                                {% endif %}
+                                {% if current_song.album %}
+                                    <tr><td>Album</td>
+                                    <td>{{current_song.album}}</td></tr>
+                                {% endif %}
+                                {% if current_song.album_artist %}
+                                    <tr><td>Album artist</td>
+                                    <td>{{current_song.album_artist}}</td></tr>
+                                {% endif %}
+                                {% if current_song.track_number %}
+                                    <tr><td>Track number</td>
+                                    <td>{{current_song.track_number}}</td></tr>
+                                {% endif %}
+                                {% if current_song.released %}
+                                    <tr><td>Release</td>
+                                    <td>{{current_song.released|date:"Y"}}</td></tr>
+                                {% endif %}
+                                {% if current_song.duration %}
+                                    <tr><td>Duration</td>
+                                    <td>{{current_song.duration|divmod_minutes_seconds}}</td></tr>
+                                {% endif %}
+                                {% if current_song.genre_set.count > 0 %}
+                                    <tr><td>Genre</td>
+                                    <td>{{current_song.genre_set.first.get_name_display}}</td></tr>
+                                {% endif %}
+                                {% if current_song.tag_set.count %}
+                                    <tr><td>Tags</td>
+                                    <td>{% for tag in current_song.tag_set.all %}{{tag.get_name_display}}{% if not forloop.last %}, {% endif %}{% endfor %}</td></tr>
+                                {% endif %}
+                            </tbody>
+                          </table>
                     </div>
 
                 <!-- /.col-lg-6 -->
@@ -142,7 +158,7 @@
             <div class="col-md-6">
                 <div class="section-title style-four">
                     <h2>YOU MAY ALSO LIKE</h2>
-                    <p>Similar songs powered by our AI</p>
+                    <p>Unveiling AI-Identified Similar Songs</p>
                 </div>
                 <!-- /.section-title -->
 
@@ -174,7 +190,5 @@
 </section>
 
 
-
-
-
 {% endblock %}
+
