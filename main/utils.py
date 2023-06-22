@@ -239,14 +239,21 @@ def update_csv_files_upon_model_deletion():
     df_features.to_csv('data/song_dataset_final.csv', index=False)
     df_metadata.to_csv('data/metadata.csv', index=False)
 
-
-def fill_genres_and_tags():
+def update_processed_status():
     songs = Song.objects.all()
-    
     df = pd.read_csv('data/song_dataset_final.csv')
     for song in songs:
         if df['song name'].isin([song.original_filename]).any():
             song.processed = True
+        else:
+            song.processed = False
+        song.save()
+
+def fill_genres_and_tags():
+    songs = Song.objects.all()
+    df = pd.read_csv('data/song_dataset_final.csv')
+    for song in songs:
+        if df['song name'].isin([song.original_filename]).any():
             if Genre.objects.filter(song=song).count() == 0:
                 song_data = df[df['song name'] == song.original_filename]
                 top_genres = song_data['top_genres'].tolist()[0]
@@ -262,10 +269,7 @@ def fill_genres_and_tags():
                 for tag in top_tags:
                     score = song_data[tag].values[0]
                     Tag.objects.create(name=tag, song=song, score=score)
-        else:
-            song.processed = False
         song.save()
-
 
 def extract_metadata():
     all_songs = Song.objects.all()

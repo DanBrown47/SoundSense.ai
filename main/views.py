@@ -9,7 +9,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.admin.views.decorators import staff_member_required
 from . models import Song
 from . forms import SongForm, UserRegistrationForm, UserPreferenceForm, SongUploadForm, LoginForm
-from . utils import get_similar_songs_id, train_model, update_songs_in_database_to_csv, update_csv_files_upon_model_deletion, fill_genres_and_tags, extract_metadata, upload_and_check_similarity
+from . utils import get_similar_songs_id, train_model, update_songs_in_database_to_csv, update_csv_files_upon_model_deletion, update_processed_status, extract_metadata, upload_and_check_similarity
 import os
 import math
 
@@ -165,5 +165,5 @@ def retrain_model(request):
 
 @staff_member_required(login_url='login')
 def update_genre_tags_processed(request):
-    fill_genres_and_tags()
+    update_processed_status()
     return redirect(request.META['HTTP_REFERER'])
