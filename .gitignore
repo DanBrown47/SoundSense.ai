@@ -159,9 +159,9 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 venv/
-media/cover_images/
-media/audio/
-data/songs_db.csv
-data/song_dataset_final.csv
-data/processed_songs.csv
-data/metadata.csv
+#media/cover_images/
+#media/audio/
+#data/songs_db.csv
+#data/song_dataset_final.csv
+#data/processed_songs.csv
+#data/metadata.csv

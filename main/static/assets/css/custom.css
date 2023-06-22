@@ -61,6 +61,22 @@
   width: 90%;
 }
 
+@media (max-width: 1440px) {
+  .snk-album-art img {
+    max-width: 430px;
+  }
+  .snk-content {
+    margin: 7% -48.5% 0% 12.5%;
+  }
+  .snk-title {
+    font-size: 60px;
+  }
+  .snk-artist {
+    font-size: 20px;
+  }
+}
+
+
 @media (max-width: 1280px) {
   .snk-album-art img {
     max-width: 430px;
